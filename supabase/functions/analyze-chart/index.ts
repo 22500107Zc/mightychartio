@@ -31,20 +31,27 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are an expert trading analyst. Analyze the trading chart image and provide:
-1. A clear signal (e.g., "Buy Signal Detected", "Sell Signal Detected", "Neutral")
-2. Detailed analysis of patterns, support/resistance levels, and market structure
-3. Specific entry point, stop loss, and target prices (use format like "$425.50")
-4. Confidence percentage (e.g., "87%")
+            content: `You are an expert trading analyst. Provide comprehensive trading analysis in JSON format:
 
-Return your analysis in JSON format:
 {
-  "signal": "signal name",
-  "analysis": "detailed analysis text",
-  "entry": "entry price with $",
-  "stopLoss": "stop loss with $", 
-  "target": "target price with $",
-  "confidence": "percentage with %"
+  "pattern": "Detected pattern name (e.g., Bullish Reversal Attempt after Downtrend)",
+  "recommendation": "BUY or SELL or WAIT",
+  "reasoningShort": "Brief reasoning for the recommendation (2-3 sentences)",
+  "technicalSentiment": "Detailed technical sentiment overview (4-6 sentences)",
+  "futureImplications": "Future price movement implications (4-6 sentences)",
+  "marketStructure": "Market structure & price action analysis (4-6 sentences)",
+  "trend": "Uptrend or Downtrend or Sideways",
+  "momentum": "Strengthening or Weakening or Neutral",
+  "volume": "High or Average or Low",
+  "keyObservations": ["Observation 1", "Observation 2"],
+  "optimalEntry": true or false,
+  "waitCondition": "If not optimal, what to wait for",
+  "riskFactors": ["Risk 1", "Risk 2"],
+  "entry": "$X,XXX.XX",
+  "stopLoss": "$X,XXX.XX",
+  "target": "$X,XXX.XX",
+  "targetGain": "+X.XX%",
+  "confidence": "XX%"
 }`,
           },
           {
@@ -89,22 +96,46 @@ Return your analysis in JSON format:
       } else {
         // Fallback if no JSON found
         analysisResult = {
-          signal: "Analysis Complete",
-          analysis: aiMessage,
+          pattern: "Analysis Complete",
+          recommendation: "WAIT",
+          reasoningShort: aiMessage.substring(0, 200),
+          technicalSentiment: aiMessage,
+          futureImplications: "",
+          marketStructure: "",
+          trend: "Unknown",
+          momentum: "Unknown",
+          volume: "Unknown",
+          keyObservations: [],
+          optimalEntry: false,
+          waitCondition: "See detailed analysis",
+          riskFactors: [],
           entry: "See analysis",
           stopLoss: "See analysis",
           target: "See analysis",
+          targetGain: "N/A",
           confidence: "N/A"
         };
       }
     } catch (e) {
       console.error("JSON parse error:", e);
       analysisResult = {
-        signal: "Analysis Complete",
-        analysis: aiMessage,
+        pattern: "Analysis Complete",
+        recommendation: "WAIT",
+        reasoningShort: aiMessage.substring(0, 200),
+        technicalSentiment: aiMessage,
+        futureImplications: "",
+        marketStructure: "",
+        trend: "Unknown",
+        momentum: "Unknown",
+        volume: "Unknown",
+        keyObservations: [],
+        optimalEntry: false,
+        waitCondition: "See detailed analysis",
+        riskFactors: [],
         entry: "See analysis",
-        stopLoss: "See analysis", 
+        stopLoss: "See analysis",
         target: "See analysis",
+        targetGain: "N/A",
         confidence: "N/A"
       };
     }
