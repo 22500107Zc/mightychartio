@@ -11,7 +11,7 @@ export const Navbar = () => {
             <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
               <TrendingUp className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-xl">TradeAI</span>
+            <span className="font-bold text-xl">MightyChart.io</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

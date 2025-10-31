@@ -268,56 +268,81 @@ export default function Analyze() {
                         </Card>
                       )}
 
-                      {/* Entry, Stop Loss & Take Profit */}
-                      {result.entry && (
-                        <div>
-                          <h3 className="text-xl font-semibold mb-4">Entry, Stop Loss & Take Profit</h3>
-                          <div className="space-y-4">
-                            <Card className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/50">
-                              <CardContent className="p-6">
-                                <div className="flex items-center justify-between">
-                                  <div>
-                                    <div className="text-sm text-blue-300 mb-1">Entry Point</div>
-                                    <div className="text-3xl font-bold">{result.entry}</div>
-                                  </div>
-                                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                                    <ArrowUp className="w-5 h-5 text-blue-400" />
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-
-                            <Card className="bg-gradient-to-r from-red-500/20 to-red-700/20 border-destructive/50">
-                              <CardContent className="p-6">
-                                <div className="flex items-center justify-between">
-                                  <div>
-                                    <div className="text-sm text-red-300 mb-1">Stop Loss</div>
-                                    <div className="text-3xl font-bold">{result.stopLoss}</div>
-                                  </div>
-                                  <div className="w-10 h-10 rounded-lg bg-destructive/20 flex items-center justify-center">
-                                    <ArrowDown className="w-5 h-5 text-destructive" />
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-
-                            <Card className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-success/50">
-                              <CardContent className="p-6">
-                                <div className="flex items-center justify-between">
-                                  <div>
-                                    <div className="text-sm text-green-300 mb-1">Take Profit 1 (Conservative)</div>
-                                    <div className="text-3xl font-bold mb-1">{result.target}</div>
-                                    <div className="text-success font-semibold">{result.targetGain} gain</div>
-                                  </div>
-                                  <div className="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center">
-                                    <TrendingUp className="w-5 h-5 text-success" />
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </div>
+                      {/* Trading Setup - ALWAYS SHOWN */}
+                      <div>
+                        <h3 className="text-xl font-semibold mb-4">Trading Setup</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <Card className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-purple-500/50">
+                            <CardContent className="p-4">
+                              <div className="text-sm text-purple-300 mb-1">Recommended Leverage</div>
+                              <div className="text-2xl font-bold">{result.leverage || "1x"}</div>
+                            </CardContent>
+                          </Card>
+                          
+                          <Card className="bg-gradient-to-br from-orange-500/20 to-red-500/20 border-orange-500/50">
+                            <CardContent className="p-4">
+                              <div className="text-sm text-orange-300 mb-1">Risk Per Trade</div>
+                              <div className="text-2xl font-bold">{result.riskPercent || "1%"}</div>
+                            </CardContent>
+                          </Card>
                         </div>
-                      )}
+
+                        <div className="space-y-4">
+                          <Card className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/50">
+                            <CardContent className="p-6">
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <div className="text-sm text-blue-300 mb-1">Entry Point</div>
+                                  <div className="text-3xl font-bold">{result.entry}</div>
+                                </div>
+                                <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                                  <ArrowUp className="w-5 h-5 text-blue-400" />
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+
+                          <Card className="bg-gradient-to-r from-red-500/20 to-red-700/20 border-destructive/50">
+                            <CardContent className="p-6">
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <div className="text-sm text-red-300 mb-1">Stop Loss</div>
+                                  <div className="text-3xl font-bold">{result.stopLoss}</div>
+                                </div>
+                                <div className="w-10 h-10 rounded-lg bg-destructive/20 flex items-center justify-center">
+                                  <ArrowDown className="w-5 h-5 text-destructive" />
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+
+                          <Card className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-success/50">
+                            <CardContent className="p-6">
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <div className="text-sm text-green-300 mb-1">Take Profit 1 (Conservative)</div>
+                                  <div className="text-3xl font-bold mb-1">{result.target}</div>
+                                  <div className="text-success font-semibold">{result.targetGain} gain</div>
+                                </div>
+                                <div className="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center">
+                                  <TrendingUp className="w-5 h-5 text-success" />
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </div>
+
+                      {/* Probability */}
+                      <Card className="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border-indigo-500/50">
+                        <CardContent className="p-6">
+                          <div className="text-center">
+                            <div className="text-sm text-muted-foreground mb-2">Trade Probability</div>
+                            <div className="text-5xl font-black text-indigo-400">{result.probability || "0%"}</div>
+                            <div className="text-xs text-muted-foreground mt-2">Based on pattern history, volume, structure & risk:reward</div>
+                          </div>
+                        </CardContent>
+                      </Card>
 
                       {/* Technical Sentiment */}
                       <Card className="bg-card/80 border-primary/30">
