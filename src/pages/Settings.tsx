@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const Settings = () => {
   const { user, loading } = useAuth();
@@ -15,6 +16,7 @@ const Settings = () => {
   const { toast } = useToast();
   const [displayName, setDisplayName] = useState('');
   const [maxRiskPercent, setMaxRiskPercent] = useState('2');
+  const [language, setLanguage] = useState('en');
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const Settings = () => {
     try {
       const { data: profile } = await supabase
         .from('profiles')
-        .select('display_name')
+        .select('display_name, language')
         .eq('user_id', user?.id)
         .single();
 
@@ -43,7 +45,10 @@ const Settings = () => {
         .eq('user_id', user?.id)
         .single();
 
-      if (profile) setDisplayName(profile.display_name || '');
+      if (profile) {
+        setDisplayName(profile.display_name || '');
+        setLanguage(profile.language || 'en');
+      }
       if (settings) setMaxRiskPercent(settings.max_risk_percent?.toString() || '2');
     } catch (error: any) {
       console.error('Error fetching settings:', error);
@@ -55,7 +60,7 @@ const Settings = () => {
     try {
       const { error: profileError } = await supabase
         .from('profiles')
-        .update({ display_name: displayName })
+        .update({ display_name: displayName, language: language })
         .eq('user_id', user?.id);
 
       if (profileError) throw profileError;
@@ -127,6 +132,18 @@ const Settings = () => {
                   onChange={(e) => setDisplayName(e.target.value)}
                   placeholder="Your name"
                 />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="language">Language</Label>
+                <Select value={language} onValueChange={setLanguage}>
+                  <SelectTrigger id="language">
+                    <SelectValue placeholder="Select language" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="es">Español</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </CardContent>
           </Card>
