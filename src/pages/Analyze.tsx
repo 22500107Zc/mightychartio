@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Upload, Loader2, TrendingUp, ArrowUp, ArrowDown, Check, AlertTriangle, BarChart3, Heart, Clock, Zap, X } from "lucide-react";
@@ -18,10 +20,18 @@ const tradingStrategies = [
 ];
 
 export default function Analyze() {
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [strategy, setStrategy] = useState("scalping");
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/auth');
+    }
+  }, [user, loading, navigate]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
