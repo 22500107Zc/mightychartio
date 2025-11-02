@@ -205,29 +205,72 @@ export default function Analyze() {
                         </Card>
                       </div>
 
-                      {/* Trading Recommendation */}
+                      {/* Trading Action Buttons */}
                       <div>
-                        <h3 className="text-xl font-semibold mb-4">Trading Recommendation</h3>
-                        <Card className={`border-2 ${
-                          result.recommendation === "BUY" 
-                            ? "bg-gradient-to-br from-success/20 to-success/5 border-success" 
-                            : result.recommendation === "SELL"
-                            ? "bg-gradient-to-br from-destructive/20 to-destructive/5 border-destructive"
-                            : "bg-gradient-to-br from-amber-500/20 to-amber-500/5 border-amber-500"
-                        }`}>
-                          <CardContent className="p-8">
-                            <div className={`text-5xl font-black text-center mb-4 ${
-                              result.recommendation === "BUY" 
-                                ? "text-success" 
-                                : result.recommendation === "SELL"
-                                ? "text-destructive"
-                                : "text-amber-500"
-                            }`}>
-                              {result.recommendation}
-                            </div>
-                            <p className="text-center text-lg">{result.reasoningShort}</p>
-                          </CardContent>
-                        </Card>
+                        <h3 className="text-xl font-semibold mb-4">Take Trade</h3>
+                        <div className="grid grid-cols-2 gap-4">
+                          <Button
+                            size="lg"
+                            className="h-20 text-2xl font-bold bg-gradient-to-br from-success to-success/80 hover:from-success/90 hover:to-success/70"
+                            onClick={async () => {
+                              try {
+                                await supabase.from('trades').insert({
+                                  user_id: user?.id,
+                                  entry_price: parseFloat(result.entry?.replace(/[^0-9.-]/g, '') || '0'),
+                                  stop_loss: parseFloat(result.stopLoss?.replace(/[^0-9.-]/g, '') || '0'),
+                                  take_profit: parseFloat(result.target?.replace(/[^0-9.-]/g, '') || '0'),
+                                  pnl: parseFloat(result.targetGain?.replace(/[^0-9.-]/g, '') || '0'),
+                                  recommendation: 'BUY',
+                                  strategy: strategy,
+                                  pattern: result.pattern,
+                                  timeframe: result.timeframe,
+                                  leverage: result.leverage,
+                                  risk_percent: parseFloat(result.riskPercent?.replace(/[^0-9.-]/g, '') || '0'),
+                                  probability: parseFloat(result.probability?.replace(/[^0-9.-]/g, '') || '0')
+                                });
+                                toast.success("Buy trade saved!");
+                                navigate('/trade-management');
+                              } catch (error: any) {
+                                toast.error("Failed to save trade: " + error.message);
+                              }
+                            }}
+                          >
+                            BUY
+                          </Button>
+                          <Button
+                            size="lg"
+                            className="h-20 text-2xl font-bold bg-gradient-to-br from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive/70"
+                            onClick={async () => {
+                              try {
+                                await supabase.from('trades').insert({
+                                  user_id: user?.id,
+                                  entry_price: parseFloat(result.entry?.replace(/[^0-9.-]/g, '') || '0'),
+                                  stop_loss: parseFloat(result.stopLoss?.replace(/[^0-9.-]/g, '') || '0'),
+                                  take_profit: parseFloat(result.target?.replace(/[^0-9.-]/g, '') || '0'),
+                                  pnl: parseFloat(result.targetGain?.replace(/[^0-9.-]/g, '') || '0'),
+                                  recommendation: 'SELL',
+                                  strategy: strategy,
+                                  pattern: result.pattern,
+                                  timeframe: result.timeframe,
+                                  leverage: result.leverage,
+                                  risk_percent: parseFloat(result.riskPercent?.replace(/[^0-9.-]/g, '') || '0'),
+                                  probability: parseFloat(result.probability?.replace(/[^0-9.-]/g, '') || '0')
+                                });
+                                toast.success("Sell trade saved!");
+                                navigate('/trade-management');
+                              } catch (error: any) {
+                                toast.error("Failed to save trade: " + error.message);
+                              }
+                            }}
+                          >
+                            SELL
+                          </Button>
+                        </div>
+                        <p className="text-center text-sm text-muted-foreground mt-4">
+                          AI Recommendation: <span className={`font-bold ${
+                            result.recommendation === "BUY" ? "text-success" : "text-destructive"
+                          }`}>{result.recommendation}</span> - {result.reasoningShort}
+                        </p>
                       </div>
 
                       {/* Not Optimal Warning */}

@@ -48,6 +48,9 @@ export const Navbar = () => {
                 <Link to="/analyze" className="text-sm hover:text-primary transition-colors">
                   Analyze
                 </Link>
+                <Link to="/trade-management" className="text-sm hover:text-primary transition-colors">
+                  Manage Trades
+                </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm">
@@ -125,6 +128,9 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/analyze" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Analyze
+                    </Link>
+                    <Link to="/trade-management" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      Manage Trades
                     </Link>
                     <Link to="/settings" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Settings

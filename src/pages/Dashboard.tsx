@@ -272,10 +272,10 @@ const Dashboard = () => {
             <CardTitle>Analyze Trade</CardTitle>
             <CardDescription>Get AI-powered trading recommendations</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="text-center py-8">
+          <CardContent className="py-4">
+            <div className="text-center">
               <p className="text-muted-foreground mb-4">Upload a chart screenshot to analyze your trading opportunities</p>
-              <Button variant="secondary" size="lg" onClick={() => navigate('/analyze')}>
+              <Button variant="secondary" size="lg" onClick={() => navigate('/trade-management')}>
                 Analyze Chart
               </Button>
             </div>
