@@ -1,19 +1,17 @@
 import { Navbar } from "@/components/Navbar";
-import { Hero } from "@/components/Hero";
-import { Features } from "@/components/Features";
+import { Pricing as PricingComponent } from "@/components/Pricing";
 import { Footer } from "@/components/Footer";
 
-const Index = () => {
+const Pricing = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <Hero />
-      <div id="features">
-        <Features />
+      <div className="flex-1">
+        <PricingComponent />
       </div>
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default Pricing;

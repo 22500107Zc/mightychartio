@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 
+const OWNER_EMAIL = "culpindustriesllc@gmail.com";
+
 export interface SubscriptionStatus {
   subscribed: boolean;
   product_id?: string;
@@ -62,6 +64,19 @@ export const useSubscription = () => {
         generations_limit: 0,
         generations_used: 0,
         generations_remaining: 0,
+      });
+      setLoading(false);
+      return;
+    }
+
+    // Owner has unlimited access
+    if (user.email === OWNER_EMAIL) {
+      setSubscriptionStatus({
+        subscribed: true,
+        generations_limit: 999999,
+        generations_used: 0,
+        generations_remaining: 999999,
+        product_id: 'owner',
       });
       setLoading(false);
       return;
@@ -132,6 +147,11 @@ export const useSubscription = () => {
   const incrementGenerationUsage = async () => {
     if (!user) return;
 
+    // Don't increment for owner
+    if (user.email === OWNER_EMAIL) {
+      return;
+    }
+
     const { error } = await supabase
       .from('subscriptions')
       .update({ 
@@ -148,8 +168,8 @@ export const useSubscription = () => {
     await checkSubscription();
   };
 
-  const canGenerate = subscriptionStatus.subscribed && 
-    subscriptionStatus.generations_remaining > 0;
+  const canGenerate = (user?.email === OWNER_EMAIL) || 
+    (subscriptionStatus.subscribed && subscriptionStatus.generations_remaining > 0);
 
   const currentTier = subscriptionStatus.product_id 
     ? SUBSCRIPTION_TIERS[subscriptionStatus.product_id as keyof typeof SUBSCRIPTION_TIERS]
