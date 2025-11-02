@@ -51,6 +51,9 @@ export const Navbar = () => {
                 <Link to="/trade-management" className="text-sm hover:text-primary transition-colors">
                   Manage Trades
                 </Link>
+                <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
+                  Pricing
+                </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm">
@@ -100,7 +103,7 @@ export const Navbar = () => {
                 <Link to="/#features" className="text-sm hover:text-primary transition-colors">
                   Features
                 </Link>
-                <Link to="/#pricing" className="text-sm hover:text-primary transition-colors">
+                <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
                   Pricing
                 </Link>
                 <Link to="/auth">
@@ -132,6 +135,9 @@ export const Navbar = () => {
                     <Link to="/trade-management" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Manage Trades
                     </Link>
+                    <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      Pricing
+                    </Link>
                     <Link to="/settings" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Settings
                     </Link>
@@ -158,7 +164,7 @@ export const Navbar = () => {
                     <Link to="/#features" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Features
                     </Link>
-                    <Link to="/#pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Pricing
                     </Link>
                     <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>

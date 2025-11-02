@@ -201,8 +201,18 @@ const Dashboard = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="p-4 rounded-lg bg-card border">
                     <div className="text-sm text-muted-foreground mb-1">Current Plan</div>
-                    <div className="text-2xl font-bold">{currentTier?.name || 'Subscribed'}</div>
-                    <div className="text-sm text-muted-foreground">${currentTier?.price}/month</div>
+                    <div className="text-2xl font-bold">
+                      {user?.email === 'culpindustriesllc@gmail.com' 
+                        ? 'Owner Account' 
+                        : currentTier?.name || 'Subscribed'
+                      }
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {user?.email === 'culpindustriesllc@gmail.com' 
+                        ? 'Unlimited Access' 
+                        : `$${currentTier?.price}/month`
+                      }
+                    </div>
                   </div>
                   <div className="p-4 rounded-lg bg-card border">
                     <div className="text-sm text-muted-foreground mb-1">Generations Used</div>
