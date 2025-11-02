@@ -135,58 +135,7 @@ const Dashboard = () => {
           <p className="text-muted-foreground">Track your trading performance</p>
         </div>
 
-        <div className="flex gap-2 mb-4">
-          <Button onClick={() => navigate('/trades')}>
-            Manage Trades
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Total P&L</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className={`text-2xl font-bold ${totalPnL >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                ${totalPnL.toFixed(2)}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Win Rate</CardTitle>
-              <BarChart3 className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{winRate}%</div>
-              <p className="text-xs text-muted-foreground">{winningTrades}W / {losingTrades}L</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Winning Trades</CardTitle>
-              <TrendingUp className="h-4 w-4 text-green-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-600">{winningTrades}</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Losing Trades</CardTitle>
-              <TrendingDown className="h-4 w-4 text-red-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-red-600">{losingTrades}</div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card>
+        <Card className="mb-8">
           <CardHeader>
             <CardTitle>Trade Journal</CardTitle>
             <CardDescription>All your analyzed trades</CardDescription>
@@ -195,7 +144,7 @@ const Dashboard = () => {
             {trades.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground mb-4">No trades yet. Start by analyzing a chart!</p>
-                <Button onClick={() => navigate('/analyze')}>Analyze Chart</Button>
+                <Button variant="secondary" onClick={() => navigate('/analyze')}>Analyze Chart</Button>
               </div>
             ) : (
               <div className="overflow-x-auto">
@@ -270,6 +219,66 @@ const Dashboard = () => {
                 </Table>
               </div>
             )}
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Total P&L</CardTitle>
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className={`text-2xl font-bold ${totalPnL >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                ${totalPnL.toFixed(2)}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Win Rate</CardTitle>
+              <BarChart3 className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{winRate}%</div>
+              <p className="text-xs text-muted-foreground">{winningTrades}W / {losingTrades}L</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Winning Trades</CardTitle>
+              <TrendingUp className="h-4 w-4 text-green-600" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-green-600">{winningTrades}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Losing Trades</CardTitle>
+              <TrendingDown className="h-4 w-4 text-red-600" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-red-600">{losingTrades}</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Analyze Trade</CardTitle>
+            <CardDescription>Get AI-powered trading recommendations</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center py-8">
+              <p className="text-muted-foreground mb-4">Upload a chart screenshot to analyze your trading opportunities</p>
+              <Button variant="secondary" size="lg" onClick={() => navigate('/analyze')}>
+                Analyze Chart
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
