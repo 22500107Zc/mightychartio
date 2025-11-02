@@ -53,6 +53,48 @@ export type Database = {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          created_at: string | null
+          generations_limit: number
+          generations_used: number
+          id: string
+          price_id: string
+          product_id: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          subscription_end: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          generations_limit?: number
+          generations_used?: number
+          id?: string
+          price_id: string
+          product_id: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          subscription_end?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          generations_limit?: number
+          generations_used?: number
+          id?: string
+          price_id?: string
+          product_id?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          subscription_end?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       trades: {
         Row: {
           analysis_data: Json | null

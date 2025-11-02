@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { TrendingUp, TrendingDown, DollarSign, BarChart3, Trash2, CheckCircle, XCircle } from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, BarChart3, Trash2, CheckCircle, XCircle, CreditCard, Loader2 } from 'lucide-react';
 
 interface Trade {
   id: string;
@@ -25,10 +26,12 @@ interface Trade {
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
+  const { subscriptionStatus, currentTier, openCustomerPortal } = useSubscription();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [trades, setTrades] = useState<Trade[]>([]);
   const [loadingTrades, setLoadingTrades] = useState(true);
+  const [managingSubscription, setManagingSubscription] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -110,6 +113,26 @@ const Dashboard = () => {
     }
   };
 
+  const handleManageSubscription = async () => {
+    try {
+      setManagingSubscription(true);
+      const url = await openCustomerPortal();
+      window.open(url, '_blank');
+      toast({
+        title: "Opening subscription management",
+        description: "Redirecting you to manage your subscription..."
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setManagingSubscription(false);
+    }
+  };
+
   const totalPnL = trades.reduce((sum, trade) => sum + (trade.pnl || 0), 0);
   const winningTrades = trades.filter(t => t.won).length;
   const losingTrades = trades.filter(t => t.won === false).length;
@@ -134,6 +157,94 @@ const Dashboard = () => {
           <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
           <p className="text-muted-foreground">Track your trading performance</p>
         </div>
+
+        <Card className="mb-8">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <CreditCard className="w-5 h-5" />
+                  Subscription Status
+                </CardTitle>
+                <CardDescription>Manage your AI analysis subscription</CardDescription>
+              </div>
+              {subscriptionStatus.subscribed && (
+                <Button 
+                  variant="outline" 
+                  onClick={handleManageSubscription}
+                  disabled={managingSubscription}
+                >
+                  {managingSubscription ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Loading...
+                    </>
+                  ) : (
+                    'Manage Subscription'
+                  )}
+                </Button>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            {subscriptionStatus.subscribed ? (
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-4 rounded-lg bg-card border">
+                    <div className="text-sm text-muted-foreground mb-1">Current Plan</div>
+                    <div className="text-2xl font-bold">{currentTier?.name || 'Subscribed'}</div>
+                    <div className="text-sm text-muted-foreground">${currentTier?.price}/month</div>
+                  </div>
+                  <div className="p-4 rounded-lg bg-card border">
+                    <div className="text-sm text-muted-foreground mb-1">Generations Used</div>
+                    <div className="text-2xl font-bold">
+                      {subscriptionStatus.generations_used}/{subscriptionStatus.generations_limit}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {subscriptionStatus.generations_remaining} remaining
+                    </div>
+                  </div>
+                  <div className="p-4 rounded-lg bg-card border">
+                    <div className="text-sm text-muted-foreground mb-1">Next Billing</div>
+                    <div className="text-lg font-bold">
+                      {subscriptionStatus.subscription_end 
+                        ? new Date(subscriptionStatus.subscription_end).toLocaleDateString()
+                        : 'N/A'
+                      }
+                    </div>
+                    <div className="text-sm text-muted-foreground">Resets monthly</div>
+                  </div>
+                </div>
+                {subscriptionStatus.generations_remaining <= 3 && (
+                  <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/50">
+                    <p className="text-sm text-destructive font-semibold">
+                      ⚠️ You're running low on generations. Consider upgrading to continue analyzing charts.
+                    </p>
+                    <Button 
+                      size="sm" 
+                      className="mt-2 bg-gradient-primary"
+                      onClick={() => navigate('/pricing')}
+                    >
+                      View Plans
+                    </Button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground mb-4">
+                  No active subscription. Subscribe to start analyzing charts with AI.
+                </p>
+                <Button 
+                  className="bg-gradient-primary"
+                  onClick={() => navigate('/pricing')}
+                >
+                  View Subscription Plans
+                </Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         <Card className="mb-8">
           <CardHeader>
