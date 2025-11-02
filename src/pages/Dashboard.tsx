@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { TrendingUp, TrendingDown, DollarSign, BarChart3, Trash2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, BarChart3, Trash2, CheckCircle, XCircle } from 'lucide-react';
 
 interface Trade {
   id: string;
@@ -86,6 +86,30 @@ const Dashboard = () => {
     }
   };
 
+  const markTradeResult = async (id: string, won: boolean) => {
+    try {
+      const { error } = await supabase
+        .from('trades')
+        .update({ won })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Trade updated",
+        description: `Trade marked as ${won ? 'Win' : 'Loss'}.`
+      });
+      
+      fetchTrades();
+    } catch (error: any) {
+      toast({
+        title: "Error updating trade",
+        description: error.message,
+        variant: "destructive"
+      });
+    }
+  };
+
   const totalPnL = trades.reduce((sum, trade) => sum + (trade.pnl || 0), 0);
   const winningTrades = trades.filter(t => t.won).length;
   const losingTrades = trades.filter(t => t.won === false).length;
@@ -109,6 +133,12 @@ const Dashboard = () => {
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
           <p className="text-muted-foreground">Track your trading performance</p>
+        </div>
+
+        <div className="flex gap-2 mb-4">
+          <Button onClick={() => navigate('/trades')}>
+            Manage Trades
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -203,13 +233,36 @@ const Dashboard = () => {
                           )}
                         </TableCell>
                         <TableCell>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => deleteTrade(trade.id)}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
+                          <div className="flex items-center gap-1">
+                            {trade.won === null && (
+                              <>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => markTradeResult(trade.id, true)}
+                                  title="Mark as Win"
+                                >
+                                  <CheckCircle className="h-4 w-4 text-green-600" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => markTradeResult(trade.id, false)}
+                                  title="Mark as Loss"
+                                >
+                                  <XCircle className="h-4 w-4 text-red-600" />
+                                </Button>
+                              </>
+                            )}
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => deleteTrade(trade.id)}
+                              title="Delete trade"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}

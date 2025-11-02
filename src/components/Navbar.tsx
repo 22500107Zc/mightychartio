@@ -67,12 +67,6 @@ export const Navbar = () => {
                         Pine Script Docs
                       </a>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                        <ExternalLink className="mr-2 h-4 w-4" />
-                        ChatGPT
-                      </a>
-                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <DropdownMenu>
@@ -147,10 +141,6 @@ export const Navbar = () => {
                       <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-primary transition-colors flex items-center gap-2 mb-2">
                         <ExternalLink className="h-4 w-4" />
                         Pine Script Docs
-                      </a>
-                      <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-primary transition-colors flex items-center gap-2">
-                        <ExternalLink className="h-4 w-4" />
-                        ChatGPT
                       </a>
                     </div>
                     <Button onClick={handleSignOut} variant="outline" className="mt-4">
