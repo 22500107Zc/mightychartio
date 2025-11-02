@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Zap, Loader2 } from "lucide-react";
-import { useSubscription } from "@/hooks/useSubscription";
+import { useSubscription, SINGLE_GENERATION } from "@/hooks/useSubscription";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -187,15 +187,17 @@ export const Pricing = () => {
               <Button 
                 className="w-full"
                 variant="outline"
-                onClick={() => {
-                  if (!user) {
-                    navigate("/auth");
-                    return;
-                  }
-                  toast.info("Single generation checkout coming soon!");
-                }}
+                onClick={() => handleSubscribe(SINGLE_GENERATION.priceId, "Single Generation")}
+                disabled={loading === SINGLE_GENERATION.priceId}
               >
-                Buy Single Generation
+                {loading === SINGLE_GENERATION.priceId ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  "Buy Single Generation"
+                )}
               </Button>
             </CardContent>
           </Card>

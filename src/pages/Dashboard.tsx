@@ -91,20 +91,29 @@ const Dashboard = () => {
 
   const markTradeResult = async (id: string, won: boolean) => {
     try {
-      const { error } = await supabase
+      console.log('Marking trade:', id, 'as', won ? 'Win' : 'Loss');
+      
+      const { data, error } = await supabase
         .from('trades')
         .update({ won })
-        .eq('id', id);
+        .eq('id', id)
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error updating trade:', error);
+        throw error;
+      }
+
+      console.log('Trade updated successfully:', data);
 
       toast({
         title: "Trade updated",
         description: `Trade marked as ${won ? 'Win' : 'Loss'}.`
       });
       
-      fetchTrades();
+      await fetchTrades();
     } catch (error: any) {
+      console.error('Full error:', error);
       toast({
         title: "Error updating trade",
         description: error.message,
