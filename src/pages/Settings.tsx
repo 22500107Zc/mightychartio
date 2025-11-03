@@ -17,7 +17,7 @@ const displayNameSchema = z.string()
   .trim()
   .min(1, 'Name cannot be empty')
   .max(50, 'Name must be less than 50 characters')
-  .regex(/^[a-zA-Z0-9\s\-_]+$/, 'Only letters, numbers, spaces, hyphens and underscores allowed');
+  .regex(/^[a-zA-Z0-9\s\-_$€£¥*+]+$/, 'Only letters, numbers, spaces, hyphens, underscores and $€£¥*+ allowed');
 
 const Settings = () => {
   const { user, loading } = useAuth();
