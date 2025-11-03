@@ -180,6 +180,7 @@ const Settings = () => {
             {saving ? 'Saving...' : 'Save Settings'}
           </Button>
         </div>
+        </div>
       </div>
     </div>
   );

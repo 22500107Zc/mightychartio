@@ -604,6 +604,7 @@ export default function Analyze() {
               )}
             </CardContent>
           </Card>
+          </div>
         </div>
       </div>
     </div>

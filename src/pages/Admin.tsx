@@ -117,13 +117,16 @@ const Admin = () => {
           </Card>
         </div>
       </div>
+    </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
-      <Navbar />
-      <div className="container mx-auto px-4 pt-24 pb-12">
+    <div className="min-h-screen bg-background">
+      <div className="purple-overlay" />
+      <div className="content-wrapper">
+        <Navbar />
+        <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="mb-8 flex items-center gap-3">
           <Shield className="w-8 h-8 text-primary" />
           <div>
@@ -178,6 +181,7 @@ const Admin = () => {
             </Button>
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   );
