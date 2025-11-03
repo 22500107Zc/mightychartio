@@ -87,21 +87,21 @@ const Admin = () => {
 
   if (loading || checkingRole) {
     return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <div className="container mx-auto px-4 pt-24">
-          <p>Loading...</p>
-        </div>
+    <div className="min-h-screen bg-gradient-hero">
+      <Navbar />
+      <div className="container mx-auto px-4 pt-24">
+        <p>Loading...</p>
       </div>
+    </div>
     );
   }
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <div className="container mx-auto px-4 pt-24">
-          <Card>
+    <div className="min-h-screen bg-gradient-hero">
+      <Navbar />
+      <div className="container mx-auto px-4 pt-24">
+        <Card>
             <CardHeader>
               <CardTitle>Access Denied</CardTitle>
               <CardDescription>You don't have permission to access this page.</CardDescription>
@@ -116,7 +116,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-hero">
       <Navbar />
       <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="mb-8 flex items-center gap-3">

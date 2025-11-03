@@ -77,7 +77,7 @@ const Settings = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-hero">
         <Navbar />
         <div className="container mx-auto px-4 pt-24">
           <p>Loading...</p>
@@ -87,7 +87,7 @@ const Settings = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-hero">
       <Navbar />
       <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="mb-8">

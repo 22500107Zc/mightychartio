@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 
 const Pricing = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-hero">
       <Navbar />
       <div className="flex-1">
         <PricingComponent />

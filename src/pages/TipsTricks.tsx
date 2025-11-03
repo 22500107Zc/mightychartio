@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const TipsTricks = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-hero">
       <Navbar />
       <main className="flex-1 container mx-auto px-4 pt-24 pb-12">
         <div className="max-w-4xl mx-auto">

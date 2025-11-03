@@ -3,7 +3,7 @@ import { TrendingUp } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-card border-t border-border py-8 px-4 md:px-6">
+    <footer className="bg-card/80 backdrop-blur-lg border-t border-border py-8 px-4 md:px-6">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
