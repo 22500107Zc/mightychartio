@@ -47,9 +47,9 @@ const tiers = [
   {
     name: "Ultimate",
     price: 500,
-    generations: 244,
-    priceId: "price_1SP9UltimatePriceId",
-    productId: "prod_TLr0Ultimate123",
+    generations: 255,
+    priceId: "price_1SPWrxLs7KD65wZPJlre0jkT",
+    productId: "prod_TMFMcKUlNY2dFg",
     description: "Maximum value package",
     featured: false,
   },
