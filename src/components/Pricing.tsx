@@ -74,9 +74,6 @@ export const Pricing = () => {
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Choose Your Plan
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Premium AI chart analysis at $1 per generation
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
@@ -173,21 +170,23 @@ export const Pricing = () => {
               </div>
               <CardTitle className="text-2xl font-bold">Pay As You Go</CardTitle>
               <CardDescription>
-                Single generation for $8 each
+                244 generations for $500
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <div className="text-3xl font-bold mb-4">
-                $8
-                <span className="text-lg text-muted-foreground font-normal">/generation</span>
+                $500
               </div>
-              <p className="text-sm text-muted-foreground mb-6">
-                Perfect for trying out the service or occasional use
-              </p>
+              <div className="text-sm text-muted-foreground mb-2">
+                244 generations
+              </div>
+              <div className="text-xs text-muted-foreground mb-6">
+                $2.05/generation
+              </div>
               <Button 
                 className="w-full"
                 variant="outline"
-                onClick={() => handleSubscribe(SINGLE_GENERATION.priceId, "Single Generation")}
+                onClick={() => handleSubscribe(SINGLE_GENERATION.priceId, "Bulk Package")}
                 disabled={loading === SINGLE_GENERATION.priceId}
               >
                 {loading === SINGLE_GENERATION.priceId ? (
@@ -196,7 +195,7 @@ export const Pricing = () => {
                     Processing...
                   </>
                 ) : (
-                  "Buy Single Generation"
+                  "Buy 244 Generations"
                 )}
               </Button>
             </CardContent>
