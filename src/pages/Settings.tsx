@@ -77,19 +77,24 @@ const Settings = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-hero">
-        <Navbar />
-        <div className="container mx-auto px-4 pt-24">
-          <p>Loading...</p>
+      <div className="min-h-screen bg-background">
+        <div className="purple-overlay" />
+        <div className="content-wrapper">
+          <Navbar />
+          <div className="container mx-auto px-4 pt-24">
+            <p>Loading...</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
-      <Navbar />
-      <div className="container mx-auto px-4 pt-24 pb-12">
+    <div className="min-h-screen bg-background">
+      <div className="purple-overlay" />
+      <div className="content-wrapper">
+        <Navbar />
+        <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Settings</h1>
           <p className="text-muted-foreground">Manage your account preferences</p>

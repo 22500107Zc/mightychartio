@@ -4,14 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
-      {/* Animated background effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/15 rounded-full blur-3xl"></div>
-      </div>
-
+    <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden">
       <div className="container relative z-10 px-4 md:px-6">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
           {/* Badge */}
@@ -23,7 +16,7 @@ export const Hero = () => {
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
             Trade with{" "}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="text-primary">
               AI precision
             </span>
             <br />

@@ -114,20 +114,22 @@ export default function Analyze() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
-      <Navbar />
-      
-      <div className="container mx-auto px-4 md:px-6 pt-24 pb-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              AI Chart{" "}
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Analysis
-              </span>
-            </h1>
-            <p className="text-lg text-muted-foreground mb-4">
-              Upload your trading chart and get instant AI-powered insights
+    <div className="min-h-screen bg-background">
+      <div className="purple-overlay" />
+      <div className="content-wrapper">
+        <Navbar />
+        
+        <div className="container mx-auto px-4 md:px-6 pt-24 pb-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                AI Chart{" "}
+                <span className="text-primary">
+                  Analysis
+                </span>
+              </h1>
+              <p className="text-lg text-muted-foreground mb-4">
+                Upload your trading chart and get instant AI-powered insights
             </p>
             <Card className="max-w-3xl mx-auto bg-primary/10 border-primary/30">
               <CardContent className="p-4">

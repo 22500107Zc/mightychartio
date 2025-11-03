@@ -65,11 +65,12 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-hero p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <div className="purple-overlay" />
+      <Card className="w-full max-w-md relative z-10">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center">
+            <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center">
               <TrendingUp className="w-7 h-7 text-white" />
             </div>
           </div>
