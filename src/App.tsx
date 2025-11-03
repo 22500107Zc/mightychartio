@@ -12,6 +12,7 @@ import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import TradeManagement from "./pages/TradeManagement";
 import Pricing from "./pages/Pricing";
+import Disclaimer from "./pages/Disclaimer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/trades" element={<TradeManagement />} />
             <Route path="/trade-management" element={<TradeManagement />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

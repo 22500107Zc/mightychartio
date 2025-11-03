@@ -267,7 +267,7 @@ const Dashboard = () => {
 
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Trade Journal</CardTitle>
+            <CardTitle>Analyze Charts</CardTitle>
             <CardDescription>All your analyzed trades</CardDescription>
           </CardHeader>
           <CardContent>
@@ -352,61 +352,24 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Total P&L</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className={`text-2xl font-bold ${totalPnL >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                ${totalPnL.toFixed(2)}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Win Rate</CardTitle>
-              <BarChart3 className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{winRate}%</div>
-              <p className="text-xs text-muted-foreground">{winningTrades}W / {losingTrades}L</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Winning Trades</CardTitle>
-              <TrendingUp className="h-4 w-4 text-green-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-600">{winningTrades}</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Losing Trades</CardTitle>
-              <TrendingDown className="h-4 w-4 text-red-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-red-600">{losingTrades}</div>
-            </CardContent>
-          </Card>
-        </div>
-
         <Card>
           <CardHeader>
-            <CardTitle>Manage Trades</CardTitle>
-            <CardDescription>Mark your pending trades as wins or losses</CardDescription>
+            <CardTitle>Trading Insight</CardTitle>
+            <CardDescription>Professional trading wisdom</CardDescription>
           </CardHeader>
-          <CardContent className="py-4">
-            <div className="text-center">
-              <p className="text-muted-foreground mb-4">View and update your pending trade outcomes</p>
-              <Button variant="secondary" size="lg" onClick={() => navigate('/trade-management')}>
-                Manage Trades
+          <CardContent className="py-8">
+            <blockquote className="text-center space-y-4">
+              <p className="text-lg md:text-xl italic text-muted-foreground">
+                "The market is a device for transferring money from the impatient to the patient."
+              </p>
+              <footer className="text-sm text-muted-foreground">— Warren Buffett</footer>
+            </blockquote>
+            <div className="mt-8 text-center">
+              <p className="text-sm text-muted-foreground mb-4">
+                Remember: AI analysis is a tool for confluence, not a guarantee of success.
+              </p>
+              <Button variant="outline" onClick={() => navigate('/disclaimer')}>
+                Read Full Disclaimer
               </Button>
             </div>
           </CardContent>

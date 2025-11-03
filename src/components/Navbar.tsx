@@ -51,6 +51,9 @@ export const Navbar = () => {
                 <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
                   Pricing
                 </Link>
+                <Link to="/disclaimer" className="text-sm hover:text-primary transition-colors">
+                  Disclaimer
+                </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm">
@@ -131,6 +134,9 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Pricing
+                    </Link>
+                    <Link to="/disclaimer" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      Disclaimer
                     </Link>
                     <Link to="/settings" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Settings
