@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
+import { ApprovalBanner } from '@/components/ApprovalBanner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -153,6 +154,7 @@ const Dashboard = () => {
         <div className="purple-overlay" />
         <div className="content-wrapper">
           <Navbar />
+          <ApprovalBanner />
           <div className="container mx-auto px-4 pt-24">
             <p>Loading...</p>
           </div>
@@ -166,6 +168,7 @@ const Dashboard = () => {
       <div className="purple-overlay" />
       <div className="content-wrapper">
         <Navbar />
+        <ApprovalBanner />
         <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Dashboard</h1>

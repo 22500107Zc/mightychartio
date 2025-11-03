@@ -8,6 +8,7 @@ import { Upload, Loader2, TrendingUp, ArrowUp, ArrowDown, Check, AlertTriangle, 
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
+import { ApprovalBanner } from "@/components/ApprovalBanner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
@@ -118,6 +119,7 @@ export default function Analyze() {
       <div className="purple-overlay" />
       <div className="content-wrapper">
         <Navbar />
+        <ApprovalBanner />
         
         <div className="container mx-auto px-4 md:px-6 pt-24 pb-16">
           <div className="max-w-4xl mx-auto">
