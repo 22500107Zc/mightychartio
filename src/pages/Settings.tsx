@@ -9,13 +9,15 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useTheme } from 'next-themes';
+import { Moon, Sun } from 'lucide-react';
 
 const Settings = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { theme, setTheme } = useTheme();
   const [displayName, setDisplayName] = useState('');
-  const [maxRiskPercent, setMaxRiskPercent] = useState('2');
   const [language, setLanguage] = useState('en');
   const [saving, setSaving] = useState(false);
 
@@ -39,17 +41,10 @@ const Settings = () => {
         .eq('user_id', user?.id)
         .single();
 
-      const { data: settings } = await supabase
-        .from('user_settings')
-        .select('max_risk_percent')
-        .eq('user_id', user?.id)
-        .single();
-
       if (profile) {
         setDisplayName(profile.display_name || '');
         setLanguage(profile.language || 'en');
       }
-      if (settings) setMaxRiskPercent(settings.max_risk_percent?.toString() || '2');
     } catch (error: any) {
       console.error('Error fetching settings:', error);
     }
@@ -64,13 +59,6 @@ const Settings = () => {
         .eq('user_id', user?.id);
 
       if (profileError) throw profileError;
-
-      const { error: settingsError } = await supabase
-        .from('user_settings')
-        .update({ max_risk_percent: parseFloat(maxRiskPercent) })
-        .eq('user_id', user?.id);
-
-      if (settingsError) throw settingsError;
 
       toast({
         title: "Settings saved",
@@ -150,23 +138,34 @@ const Settings = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Trading Preferences</CardTitle>
-              <CardDescription>Configure your trading settings</CardDescription>
+              <CardTitle>Appearance</CardTitle>
+              <CardDescription>Customize how the app looks</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="maxRisk">Max Risk Per Trade (%)</Label>
-                <Input
-                  id="maxRisk"
-                  type="number"
-                  step="0.1"
-                  min="0.1"
-                  max="10"
-                  value={maxRiskPercent}
-                  onChange={(e) => setMaxRiskPercent(e.target.value)}
-                />
+                <Label htmlFor="theme">Theme</Label>
+                <Select value={theme} onValueChange={setTheme}>
+                  <SelectTrigger id="theme">
+                    <SelectValue placeholder="Select theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">
+                      <div className="flex items-center gap-2">
+                        <Sun className="w-4 h-4" />
+                        Light
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="dark">
+                      <div className="flex items-center gap-2">
+                        <Moon className="w-4 h-4" />
+                        Dark
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="system">System</SelectItem>
+                  </SelectContent>
+                </Select>
                 <p className="text-xs text-muted-foreground">
-                  Maximum percentage of your account you're willing to risk on a single trade
+                  Choose your preferred color theme
                 </p>
               </div>
             </CardContent>
