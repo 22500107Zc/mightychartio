@@ -160,7 +160,7 @@ const TradeManagement = () => {
                         <TableCell>${trade.entry_price?.toFixed(2) || 'N/A'}</TableCell>
                         <TableCell>${trade.stop_loss?.toFixed(2) || 'N/A'}</TableCell>
                         <TableCell>${trade.take_profit?.toFixed(2) || 'N/A'}</TableCell>
-                        <TableCell className={trade.pnl >= 0 ? 'text-green-600' : 'text-red-600'}>
+                        <TableCell className={trade.pnl >= 0 ? 'text-accent' : 'text-red-600'}>
                           ${trade.pnl?.toFixed(2) || '0.00'}
                         </TableCell>
                         <TableCell>
@@ -169,7 +169,7 @@ const TradeManagement = () => {
                               variant="outline"
                               size="sm"
                               onClick={() => markTradeResult(trade.id, true)}
-                              className="text-green-600 hover:bg-green-600 hover:text-white"
+                              className="text-accent hover:bg-accent hover:text-accent-foreground"
                             >
                               <CheckCircle className="h-4 w-4 mr-1" />
                               Win

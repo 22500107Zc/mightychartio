@@ -450,15 +450,15 @@ export default function Analyze() {
                             </CardContent>
                           </Card>
 
-                          <Card className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-success/50">
+                          <Card className="bg-gradient-to-r from-accent/20 to-accent/30 border-accent/50">
                             <CardContent className="p-6">
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <div className="text-sm text-green-300 mb-1">Take Profit 1 (Conservative)</div>
+                                  <div className="text-sm text-accent mb-1">Take Profit 1 (Conservative)</div>
                                   <div className="text-3xl font-bold">{result.target}</div>
                                 </div>
-                                <div className="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center">
-                                  <TrendingUp className="w-5 h-5 text-success" />
+                                <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
+                                  <TrendingUp className="w-5 h-5 text-accent" />
                                 </div>
                               </div>
                             </CardContent>

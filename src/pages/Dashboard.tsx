@@ -299,14 +299,14 @@ const Dashboard = () => {
                         <TableCell>${trade.entry_price?.toFixed(2) || 'N/A'}</TableCell>
                         <TableCell>${trade.stop_loss?.toFixed(2) || 'N/A'}</TableCell>
                         <TableCell>${trade.take_profit?.toFixed(2) || 'N/A'}</TableCell>
-                        <TableCell className={trade.pnl >= 0 ? 'text-green-600' : 'text-red-600'}>
+                        <TableCell className={trade.pnl >= 0 ? 'text-accent' : 'text-red-600'}>
                           ${trade.pnl?.toFixed(2) || '0.00'}
                         </TableCell>
                         <TableCell>
                           {trade.won === null ? (
                             <Badge variant="outline">Pending</Badge>
                           ) : trade.won ? (
-                            <Badge className="bg-green-600">Win</Badge>
+                            <Badge className="bg-accent text-accent-foreground">Win</Badge>
                           ) : (
                             <Badge className="bg-red-600">Loss</Badge>
                           )}
@@ -321,7 +321,7 @@ const Dashboard = () => {
                                   onClick={() => markTradeResult(trade.id, true)}
                                   title="Mark as Win"
                                 >
-                                  <CheckCircle className="h-4 w-4 text-green-600" />
+                                  <CheckCircle className="h-4 w-4 text-accent" />
                                 </Button>
                                 <Button
                                   variant="ghost"
