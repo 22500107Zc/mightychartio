@@ -18,7 +18,7 @@ const TIER_LIMITS: Record<string, number> = {
   "prod_TLqyJvYY90VT8V": 33,   // Pro
   "prod_TLqzRF5osRMCCg": 77,   // Premium
   "prod_TLqzip2WAay0tq": 133,  // Elite
-  "prod_TLr0Ultimate123": 244, // Ultimate
+  "prod_TMFMcKUlNY2dFg": 255,  // Ultimate
 };
 
 serve(async (req) => {

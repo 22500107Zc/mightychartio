@@ -38,11 +38,11 @@ export const SUBSCRIPTION_TIERS = {
     generations: 133,
     priceId: 'price_1SP9HdLs7KD65wZPt1FdSy9Q',
   },
-  'prod_TLr0Ultimate123': {
+  'prod_TMFMcKUlNY2dFg': {
     name: 'Ultimate',
     price: 500,
-    generations: 244,
-    priceId: 'price_1SP9UltimatePriceId',
+    generations: 255,
+    priceId: 'price_1SPWrxLs7KD65wZPJlre0jkT',
   },
 };
 
