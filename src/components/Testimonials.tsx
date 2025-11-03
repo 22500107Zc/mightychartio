@@ -89,7 +89,7 @@ export const Testimonials = () => {
           <div className="animate-scroll-left inline-flex items-center gap-6 text-muted-foreground whitespace-nowrap">
             <div className="inline-flex items-center gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-foreground">12,400+</div>
+                <div className="text-3xl font-bold text-foreground">44,000+</div>
                 <div className="text-sm">Active Traders</div>
               </div>
               <div className="w-px h-12 bg-border"></div>
@@ -105,7 +105,7 @@ export const Testimonials = () => {
             </div>
             <div className="inline-flex items-center gap-6 ml-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-foreground">12,400+</div>
+                <div className="text-3xl font-bold text-foreground">44,000+</div>
                 <div className="text-sm">Active Traders</div>
               </div>
               <div className="w-px h-12 bg-border"></div>

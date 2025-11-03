@@ -39,7 +39,7 @@ export const Hero = () => {
               <div className="text-sm text-muted-foreground mt-1">Analysis Speed</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-4xl md:text-5xl font-bold text-accent">12,400+</div>
+              <div className="text-4xl md:text-5xl font-bold text-accent">44,000+</div>
               <div className="text-sm text-muted-foreground mt-1">Active Traders</div>
             </div>
           </div>

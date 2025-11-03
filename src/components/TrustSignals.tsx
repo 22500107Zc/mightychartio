@@ -42,7 +42,7 @@ export const TrustSignals = () => {
             <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-3">
               <Users className="w-8 h-8 text-primary" />
             </div>
-            <div className="font-semibold text-sm">12,400+</div>
+            <div className="font-semibold text-sm">44,000+</div>
             <div className="text-xs text-muted-foreground">Active Users</div>
           </div>
 
