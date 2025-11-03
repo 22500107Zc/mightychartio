@@ -38,7 +38,7 @@ export const Hero = () => {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
             <div className="flex flex-col items-center">
-              <div className="text-4xl md:text-5xl font-bold text-success">97%</div>
+              <div className="text-4xl md:text-5xl font-bold text-success">92%</div>
               <div className="text-sm text-muted-foreground mt-1">Pattern Accuracy</div>
             </div>
             <div className="flex flex-col items-center">

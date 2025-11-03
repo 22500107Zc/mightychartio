@@ -35,24 +35,32 @@ const Disclaimer = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="w-5 h-5" />
-                No Financial Advice
+                Understanding Our AI Analysis Tool
               </CardTitle>
-              <CardDescription>Understanding the nature of our service</CardDescription>
+              <CardDescription>How to use MightyChart.io effectively and responsibly</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                MightyChart.io provides AI-powered technical analysis tools for educational and informational purposes only. 
-                <strong> We are not financial advisors, brokers, or investment professionals.</strong>
+                MightyChart.io provides sophisticated AI-powered technical analysis that identifies patterns, key levels, and 
+                potential trading opportunities based on chart data. <strong>Our AI does analyze charts and provide trading 
+                positions</strong> - however, <strong>we are not financial advisors, brokers, or investment professionals.</strong>
               </p>
               <p>
-                Our AI analysis should <strong>never be used as the sole basis</strong> for making trading decisions. 
-                The information provided by our platform:
+                <strong>How to maximize analysis accuracy:</strong> Upload 6-8 screenshots from multiple timeframes (1H, 4H, Daily, 
+                Weekly, etc.) with technical indicators visible. The more data points you provide, the better the AI's analysis. 
+                <strong> Always include indicators like Volume, RSI, KDJ, MACD</strong>, and alternate between Bollinger Bands and 
+                Ichimoku Cloud across your screenshots.
+              </p>
+              <p>
+                While our AI provides detailed analysis, the information should <strong>never be your only decision-making 
+                factor</strong>. Our analysis:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Does not constitute financial, investment, trading, or other advice</li>
-                <li>Is not a recommendation to buy, sell, or hold any security or financial instrument</li>
-                <li>Should not be relied upon without independent verification</li>
-                <li>May contain errors, inaccuracies, or be incomplete</li>
+                <li>Should be used as one confluence factor among multiple analysis methods</li>
+                <li>Does not constitute financial, investment, or trading advice</li>
+                <li>Is not a guaranteed recommendation to buy, sell, or hold any security</li>
+                <li>Should be combined with your own research and risk management</li>
+                <li>May not account for all market factors, news events, or sudden volatility</li>
               </ul>
             </CardContent>
           </Card>
@@ -100,17 +108,22 @@ const Disclaimer = () => {
                 This means:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Upload multiple screenshots (6-8 recommended):</strong> Include different timeframes to give the AI comprehensive context</li>
+                <li><strong>Always show technical indicators:</strong> Volume, RSI, KDJ, MACD should be visible on your charts</li>
+                <li><strong>Alternate overlay indicators:</strong> Use Bollinger Bands on some screenshots and Ichimoku Cloud on others</li>
+                <li><strong>More data = Better accuracy:</strong> The more indicator data and timeframes you provide, the more accurate the analysis</li>
                 <li>Use our analysis to <strong>supplement</strong> your own research and due diligence</li>
                 <li>Combine AI insights with multiple sources of information and analysis</li>
                 <li>Never risk more than you can afford to lose</li>
                 <li>Consider consulting with qualified financial professionals</li>
                 <li>Develop and follow your own risk management strategy</li>
-                <li>Understand that AI predictions can be incorrect</li>
+                <li>Understand that even with optimal data, AI predictions can be incorrect</li>
               </ul>
               <div className="mt-4 p-4 bg-primary/10 border border-primary/20 rounded-lg">
                 <p className="text-sm">
                   <strong>Best Practice:</strong> Always use multiple forms of analysis (fundamental, technical, sentiment) 
-                  and never rely on a single tool or indicator when making trading decisions.
+                  and never rely on a single tool or indicator when making trading decisions. Upload charts with maximum 
+                  technical indicator coverage for optimal AI performance.
                 </p>
               </div>
             </CardContent>

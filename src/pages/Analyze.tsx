@@ -126,9 +126,24 @@ export default function Analyze() {
                 Analysis
               </span>
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground mb-4">
               Upload your trading chart and get instant AI-powered insights
             </p>
+            <Card className="max-w-3xl mx-auto bg-primary/10 border-primary/30">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <p className="font-semibold text-primary mb-1">For Best Results:</p>
+                    <p className="text-foreground">
+                      Upload <strong>6-8 screenshots</strong> from multiple timeframes (1H, 4H, Daily, Weekly). 
+                      Include indicators: <strong>Volume, RSI, KDJ, MACD</strong> (always visible), and alternate between 
+                      <strong> Bollinger Bands & Ichimoku Cloud</strong>. More indicator data = higher accuracy.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
             {subscriptionStatus.subscribed && (
               <Card className="max-w-md mx-auto mt-6 bg-card/50 backdrop-blur-sm">
                 <CardContent className="p-4">
