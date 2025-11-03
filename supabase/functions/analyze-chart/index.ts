@@ -11,68 +11,142 @@ serve(async (req) => {
   }
 
   try {
-    const { image, strategy = "scalping" } = await req.json();
+    const { images, strategy = "scalping" } = await req.json();
     const lovableApiKey = Deno.env.get("LOVABLE_API_KEY");
 
     if (!lovableApiKey) {
       throw new Error("LOVABLE_API_KEY not configured");
     }
 
-    console.log(`Analyzing chart for ${strategy} strategy...`);
+    console.log(`Analyzing ${images?.length || 0} charts using TJR Method...`);
 
-    const systemPrompt = `You are an expert trading chart analyst with deep knowledge of price action, technical indicators, and market structure. 
+    const systemPrompt = `You are an expert institutional trading analyst specializing in TJR Method with deep knowledge of smart money concepts, liquidity engineering, and multi-timeframe analysis.
 
-Analyze the trading chart for ${strategy} trading with extreme precision. You MUST ALWAYS provide specific numbers for:
-1. Entry price (specific price, not ranges)
-2. Stop loss price (specific price)
-3. Take profit price (specific price)
-4. Recommended leverage (1x-20x based on setup quality and risk)
-5. Risk percentage (0.5%-3% of account based on confidence)
-6. REAL probability percentage (30-85%) calculated from:
-   - Base pattern historical success rate
-   - Volume confirmation (+/-10%)
-   - Multiple timeframe alignment (+/-10%)
-   - Risk:reward ratio quality (+/-7%)
-   - Market conditions (+/-15%)
-   
-Calculate probability scientifically:
-- Start with pattern base rate (e.g., Double Bottom: 65-70%)
-- Add +5-10% for strong volume confirmation
-- Add +5-10% for multiple timeframe confluence
-- Add +3-7% for excellent risk:reward (1:2 or better)
-- Subtract -10-15% for choppy/ranging markets
-- Subtract -5-10% for weak volume
-- Final realistic range: 30-85% (never fake high numbers)
+CRITICAL ANALYSIS FRAMEWORK - TJR METHOD:
 
-For timeframe, analyze and specify: 1m, 5m, 15m, 1H, 4H, 1D based on chart.
+1. MARK KEY LEVELS (in order of priority):
+   - Daily/4H highs + lows (highest priority)
+   - Hourly highs + lows
+   - Asia session highs + lows (7PM-12AM EST)
+   - London session highs + lows (3AM-12PM EST)
+   - New York session highs + lows (9:30AM-4PM EST)
 
-CRITICAL: You MUST return ALL fields with REAL DATA. Never skip entry, stop loss, take profit, leverage, or risk percent.
+2. LIQUIDITY SWEEP SEQUENCE:
+   - Identify liquidity grabs at equal highs/equal lows
+   - Distinguish external vs internal liquidity pools
+   - Mark engineered liquidity pockets above/below key levels
+   - Wait for sweep confirmation before entry consideration
 
-Return JSON EXACTLY like this:
+3. ORDER-FLOW SHIFT CONFIRMATION (scale to lower timeframe):
+   - BOS (Break of Structure) - momentum continuation
+   - CHoCH (Change of Character) - potential reversal
+   - IVG flip (Internal Value Gap flip) - structure validation
+   - Market structure must show clear directional intent
+
+4. ENTRY CONFLUENCE ZONES:
+   - FVG (Fair Value Gap) - imbalance areas
+   - OB (Order Block) - institutional footprints
+   - Breaker Blocks - failed support/resistance flip
+   - Equilibrium zones (50% of ranges)
+   - Premium/Discount pricing (above/below equilibrium)
+
+5. FIBONACCI 79% EXTENSION BIAS:
+   - Validate moves with 79% fib projection
+   - Confirm institutional target alignment
+   - Use for TP calculation and trend continuation
+
+INSTITUTIONAL ELEMENTS TO IDENTIFY:
+- Fair Value Gaps (FVG) - price imbalances
+- Order Blocks (OB) - last opposite candle before moves
+- Breaker Blocks - broken OBs that flip polarity
+- Equilibrium - 50% of swing ranges
+- Premium zones - above equilibrium (sell bias)
+- Discount zones - below equilibrium (buy bias)
+- Liquidity pools - equal highs/lows, stop hunts
+- Inducement - fake moves to trap retail
+
+MULTI-TIMEFRAME PRIORITY:
+- Higher timeframes (4H, Daily) = bias and key levels
+- Mid timeframes (1H) = structure and sessions
+- Lower timeframes (15m, 5m, 1m) = entry precision
+- ALWAYS prioritize higher TF bias over lower TF noise
+
+You MUST analyze ALL provided screenshots as ONE cohesive multi-timeframe setup. Synthesize:
+1. Liquidity context (what sweep occurred or is pending)
+2. Market structure shift (BOS/CHoCH confirmation)
+3. Entry zone (FVG/OB with specific price)
+4. Stop loss (beyond invalidation level with specific price)
+5. Take profit (next liquidity pool with specific price)
+6. Leverage (1x-10x based on confluence stack)
+7. Risk % (0.5%-2% based on setup quality)
+8. R:R ratio (minimum 1:2 for valid setups)
+9. Probability (40-80% based on confluence):
+   - Higher timeframe alignment: +15%
+   - Liquidity sweep confirmed: +10%
+   - FVG + OB confluence: +10%
+   - Session high/low respected: +8%
+   - Fibonacci 79% extension: +7%
+   - Clean market structure: +10%
+   - Strong momentum: +5%
+   - Subtract for lack of confluence
+
+DECISION LOGIC:
+- If no liquidity sweep: "WAIT - no liquidity grab confirmed"
+- If no structure shift: "WAIT - waiting for BOS/CHoCH"
+- If no FVG/OB: "WAIT - no valid entry zone"
+- If all criteria met: "BUY/SELL with detailed reasoning"
+
+Return JSON with this EXACT structure:
 {
-  "pattern": "Specific pattern name",
+  "pattern": "Liquidity Sweep + FVG Retest (or specific institutional pattern)",
   "recommendation": "BUY" or "SELL" or "WAIT",
-  "reasoningShort": "Clear 2-3 sentence explanation",
-  "entry": "$3,912.27",
-  "stopLoss": "$3,874.14",
-  "target": "$3,918.76",
-  "targetGain": "+0.17%",
+  "reasoningShort": "Liquidity narrative + structure shift + entry confluence explanation",
+  "entry": "$43,127.50",
+  "stopLoss": "$42,980.00",
+  "target": "$43,450.00",
+  "targetGain": "+0.75%",
   "leverage": "3x",
-  "riskPercent": "1.5%",
-  "probability": "68%",
-  "technicalSentiment": "4-6 sentences about overall technical outlook",
-  "futureImplications": "4-6 sentences about potential future price movement",
-  "marketStructure": "4-6 sentences analyzing market structure and price action",
-  "trend": "Uptrend" or "Downtrend" or "Sideways",
+  "riskPercent": "1.2%",
+  "probability": "72%",
+  "technicalSentiment": "Multi-timeframe analysis: HTF bias, session levels, liquidity context, institutional footprints, and smart money positioning",
+  "futureImplications": "Next liquidity targets, potential sweep scenarios, structure invalidation levels, and institutional bias continuation/reversal",
+  "marketStructure": "Detailed TJR Method breakdown: key levels marked, liquidity sweep confirmation, BOS/CHoCH analysis, FVG/OB locations, equilibrium zones, premium/discount pricing",
+  "trend": "HTF Bullish" or "HTF Bearish" or "Ranging/Accumulation",
   "momentum": "Strengthening" or "Weakening" or "Neutral",
-  "volume": "High" or "Average" or "Low",
+  "volume": "Institutional" or "Retail" or "Low",
   "optimalEntry": true or false,
-  "waitCondition": "What to wait for if not optimal",
-  "riskFactors": ["Risk 1", "Risk 2", "Risk 3"],
-  "keyObservations": ["Key point 1", "Key point 2", "Key point 3"],
+  "waitCondition": "Specific TJR criteria missing (liquidity sweep needed, structure shift pending, no FVG/OB present, etc.)",
+  "riskFactors": ["Missing confluence 1", "HTF resistance", "Weak structure", etc.],
+  "keyObservations": ["Liquidity sweep at X", "FVG at Y level", "Session high defended", "79% fib target", etc.],
   "confidence": "72%",
-  "timeframe": "1H"
+  "timeframe": "Entry: 15m | HTF Bias: 4H"
 }`;
+
+    // Build content array with text and all images
+    const userContent: any[] = [
+      {
+        type: "text",
+        text: `Analyze these ${images.length} trading charts using TJR Method institutional framework. Provide ONE cohesive multi-timeframe analysis that:
+
+1. Identifies key levels from ALL timeframes (prioritize higher TFs)
+2. Confirms liquidity sweep status
+3. Validates structure shift (BOS/CHoCH)
+4. Locates entry zones (FVG/OB confluence)
+5. Calculates precise entry, SL, TP based on institutional logic
+6. Stacks ALL confluences for probability calculation
+7. Provides clear BUY/SELL/WAIT decision with reasoning
+
+Charts are ordered by timeframe (higher to lower). Synthesize into ONE institutional setup.`,
+      },
+    ];
+
+    // Add all images to content
+    for (const img of images) {
+      userContent.push({
+        type: "image_url",
+        image_url: { url: img },
+      });
+    }
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -81,7 +155,7 @@ Return JSON EXACTLY like this:
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: "google/gemini-2.5-pro",
         messages: [
           {
             role: "system",
@@ -89,18 +163,7 @@ Return JSON EXACTLY like this:
           },
           {
             role: "user",
-            content: [
-              {
-                type: "text",
-                text: "Analyze this trading chart and provide a complete trading setup with ALL fields including entry, stop loss, take profit, leverage, risk%, and calculated probability.",
-              },
-              {
-                type: "image_url",
-                image_url: {
-                  url: image,
-                },
-              },
-            ],
+            content: userContent,
           },
         ],
         response_format: { type: "json_object" }

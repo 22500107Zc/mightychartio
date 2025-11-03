@@ -26,7 +26,7 @@ export default function Analyze() {
   const navigate = useNavigate();
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState<any>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [strategy, setStrategy] = useState("scalping");
 
   useEffect(() => {
@@ -36,8 +36,13 @@ export default function Analyze() {
   }, [user, loading, navigate]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    if (files.length > 8) {
+      toast.error("Maximum 8 screenshots allowed");
+      return;
+    }
 
     // Check if user can generate
     if (!canGenerate) {
@@ -52,32 +57,37 @@ export default function Analyze() {
       }
     }
 
-    if (!file.type.startsWith("image/")) {
-      toast.error("Please upload an image file");
-      return;
+    // Validate all files are images
+    for (let i = 0; i < files.length; i++) {
+      if (!files[i].type.startsWith("image/")) {
+        toast.error("Please upload only image files");
+        return;
+      }
     }
-
-    // Create preview
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreview(reader.result as string);
-    };
-    reader.readAsDataURL(file);
 
     setAnalyzing(true);
     setResult(null);
 
     try {
-      // Convert image to base64
-      const base64 = await new Promise<string>((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.readAsDataURL(file);
-      });
+      // Convert all images to base64
+      const base64Images: string[] = [];
+      const previews: string[] = [];
+      
+      for (let i = 0; i < files.length; i++) {
+        const base64 = await new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.readAsDataURL(files[i]);
+        });
+        base64Images.push(base64);
+        previews.push(base64);
+      }
 
-      // Call edge function
+      setImagePreviews(previews);
+
+      // Call edge function with multiple images
       const { data, error } = await supabase.functions.invoke("analyze-chart", {
-        body: { image: base64, strategy },
+        body: { images: base64Images, strategy },
       });
 
       if (error) throw error;
@@ -86,10 +96,10 @@ export default function Analyze() {
       await incrementGenerationUsage();
 
       setResult(data);
-      toast.success("Chart analyzed successfully!");
+      toast.success("Multi-timeframe analysis complete!");
     } catch (error: any) {
       console.error("Analysis error:", error);
-      toast.error(error.message || "Failed to analyze chart");
+      toast.error(error.message || "Failed to analyze charts");
     } finally {
       setAnalyzing(false);
     }
@@ -198,21 +208,22 @@ export default function Analyze() {
 
           <Card className="bg-card/50 backdrop-blur-sm border-border">
             <CardContent className="p-8">
-              {!imagePreview ? (
+              {imagePreviews.length === 0 ? (
                 <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <Upload className="w-12 h-12 mb-4 text-muted-foreground" />
                     <p className="mb-2 text-sm text-muted-foreground">
-                      <span className="font-semibold">Click to upload</span> or drag and drop
+                      <span className="font-semibold">Click to upload 6-8 screenshots</span> or drag and drop
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      PNG, JPG or JPEG (MAX. 10MB)
+                      Multiple timeframes (1H, 4H, Daily, etc.) - PNG, JPG (MAX. 8 images)
                     </p>
                   </div>
                   <input
                     type="file"
                     className="hidden"
                     accept="image/*"
+                    multiple
                     onChange={handleFileUpload}
                     disabled={analyzing}
                   />
@@ -220,17 +231,22 @@ export default function Analyze() {
               ) : (
                 <div className="space-y-6">
                   <div className="relative">
-                    <img
-                      src={imagePreview}
-                      alt="Uploaded chart"
-                      className="w-full rounded-lg"
-                    />
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                      {imagePreviews.map((preview, idx) => (
+                        <img
+                          key={idx}
+                          src={preview}
+                          alt={`Chart ${idx + 1}`}
+                          className="w-full rounded-lg border-2 border-border hover:border-primary/50 transition-colors"
+                        />
+                      ))}
+                    </div>
                     {analyzing && (
                       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
                         <div className="text-center">
                           <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
                           <p className="text-sm text-muted-foreground">
-                            Analyzing chart patterns...
+                            Analyzing multi-timeframe setup with TJR Method...
                           </p>
                         </div>
                       </div>
@@ -250,7 +266,7 @@ export default function Analyze() {
                         <Button
                           variant="outline"
                           onClick={() => {
-                            setImagePreview(null);
+                            setImagePreviews([]);
                             setResult(null);
                           }}
                           className="gap-2"
@@ -577,11 +593,11 @@ export default function Analyze() {
                     variant="outline"
                     className="w-full"
                     onClick={() => {
-                      setImagePreview(null);
+                      setImagePreviews([]);
                       setResult(null);
                     }}
                   >
-                    Analyze Another Chart
+                    Analyze Another Set
                   </Button>
                 </div>
               )}
