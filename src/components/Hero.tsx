@@ -8,9 +8,9 @@ export const Hero = () => {
       <div className="container relative z-10 px-4 md:px-6">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-primary/20">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground">AI-Powered Trading Intelligence</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-accent/30">
+            <Sparkles className="w-4 h-4 text-accent" />
+            <span className="text-sm font-medium text-foreground">🇺🇸 Now USA Approved - AI-Powered Trading Intelligence</span>
           </div>
 
           {/* Main heading */}
@@ -31,7 +31,7 @@ export const Hero = () => {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
             <div className="flex flex-col items-center">
-              <div className="text-4xl md:text-5xl font-bold text-accent">92%</div>
+              <div className="text-4xl md:text-5xl font-bold text-accent">89%</div>
               <div className="text-sm text-muted-foreground mt-1">Pattern Accuracy</div>
             </div>
             <div className="flex flex-col items-center">

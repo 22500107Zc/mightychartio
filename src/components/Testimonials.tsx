@@ -10,25 +10,39 @@ const testimonials = [
     profit: "+$47,230"
   },
   {
-    name: "Sarah Mitchell",
-    role: "Swing Trader, Australia",
+    name: "Yuki Tanaka",
+    role: "Swing Trader, Japan",
     content: "I was skeptical at first, but the AI's pattern recognition is incredible. It identified a bullish divergence I completely overlooked. Made 12% on that trade alone.",
     rating: 5,
     profit: "+$23,890"
   },
   {
-    name: "David Kumar",
-    role: "Professional Trader, UK",
+    name: "Raj Patel",
+    role: "Professional Trader, India",
     content: "The risk management calculations alone are worth the subscription. I've reduced my drawdowns by 40% while maintaining profitability.",
     rating: 5,
     profit: "+$91,450"
   },
   {
-    name: "Emma Rodriguez",
-    role: "Crypto Trader, Spain",
+    name: "Elena Volkov",
+    role: "Crypto Trader, Russia",
     content: "Best trading tool I've ever used. The AI catches reversal patterns early and the entry/exit points are spot-on. My portfolio is up 156% this year.",
     rating: 5,
     profit: "+$68,920"
+  },
+  {
+    name: "Wei Zhang",
+    role: "Forex Trader, China",
+    content: "Finally, a tool that understands Asian market dynamics. The AI adapts to different sessions perfectly. My consistency has improved dramatically.",
+    rating: 5,
+    profit: "+$54,780"
+  },
+  {
+    name: "Arjun Sharma",
+    role: "Options Trader, Dubai",
+    content: "The precision is unmatched. I've been trading for 8 years and this AI spots opportunities I miss. Worth every penny for the edge it provides.",
+    rating: 5,
+    profit: "+$73,210"
   }
 ];
 
@@ -46,7 +60,7 @@ export const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all">
               <CardContent className="p-6">
@@ -71,21 +85,39 @@ export const Testimonials = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-6 text-muted-foreground">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-foreground">12,400+</div>
-              <div className="text-sm">Active Traders</div>
+        <div className="mt-12 overflow-hidden">
+          <div className="animate-scroll-left inline-flex items-center gap-6 text-muted-foreground whitespace-nowrap">
+            <div className="inline-flex items-center gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-foreground">12,400+</div>
+                <div className="text-sm">Active Traders</div>
+              </div>
+              <div className="w-px h-12 bg-border"></div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-foreground">890K+</div>
+                <div className="text-sm">Charts Analyzed</div>
+              </div>
+              <div className="w-px h-12 bg-border"></div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-accent">89%</div>
+                <div className="text-sm">Avg Success Rate</div>
+              </div>
             </div>
-            <div className="w-px h-12 bg-border"></div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-foreground">890K+</div>
-              <div className="text-sm">Charts Analyzed</div>
-            </div>
-            <div className="w-px h-12 bg-border"></div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-accent">87%</div>
-              <div className="text-sm">Avg Success Rate</div>
+            <div className="inline-flex items-center gap-6 ml-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-foreground">12,400+</div>
+                <div className="text-sm">Active Traders</div>
+              </div>
+              <div className="w-px h-12 bg-border"></div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-foreground">890K+</div>
+                <div className="text-sm">Charts Analyzed</div>
+              </div>
+              <div className="w-px h-12 bg-border"></div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-accent">89%</div>
+                <div className="text-sm">Avg Success Rate</div>
+              </div>
             </div>
           </div>
         </div>

@@ -50,7 +50,7 @@ export const TrustSignals = () => {
             <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-3">
               <TrendingUp className="w-8 h-8 text-primary" />
             </div>
-            <div className="font-semibold text-sm">87% Success</div>
+            <div className="font-semibold text-sm">89% Success</div>
             <div className="text-xs text-muted-foreground">Rate</div>
           </div>
 
