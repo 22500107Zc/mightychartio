@@ -14,7 +14,7 @@ const tiers = [
     generations: 244,
     priceId: SINGLE_GENERATION.priceId,
     description: "Maximum value package",
-    featured: true,
+    featured: false,
   },
   {
     name: "Starter",
@@ -46,7 +46,7 @@ const tiers = [
     generations: 133,
     priceId: "price_1SP9HdLs7KD65wZPt1FdSy9Q",
     description: "Ultimate trading power",
-    featured: false,
+    featured: true,
   },
 ];
 
@@ -99,7 +99,7 @@ export const Pricing = () => {
                 {tier.featured && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                     <div className="bg-gradient-primary px-4 py-1 rounded-full text-sm font-semibold">
-                      Most Popular
+                      Most Purchased
                     </div>
                   </div>
                 )}
