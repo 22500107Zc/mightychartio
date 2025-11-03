@@ -44,12 +44,13 @@ const TipsTricks = () => {
                 <Target className="w-5 h-5" />
                 Essential: Upload Multiple Timeframes
               </CardTitle>
-              <CardDescription>Give the AI complete market context</CardDescription>
+              <CardDescription>Give the AI complete market context (works with any timeframe)</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                <strong>Why multiple screenshots matter:</strong> Professional traders never look at just one timeframe. 
-                The same principle applies to AI analysis. By providing charts from different timeframes, you enable the AI to:
+                <strong>The AI can analyze any timeframe</strong> you provide, but for maximum accuracy, use multiple timeframes. 
+                Professional traders never look at just one timeframe - the same principle applies to AI analysis. 
+                By providing charts from different timeframes, you enable the AI to:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li><strong>Weekly/Daily charts:</strong> Identify major support/resistance levels and overall trend direction</li>
@@ -58,8 +59,8 @@ const TipsTricks = () => {
               </ul>
               <div className="mt-4 p-4 bg-success/10 border border-success/20 rounded-lg">
                 <p className="text-sm font-semibold text-success">
-                  💡 Pro Tip: Upload 6-8 screenshots covering at least 3 different timeframes for optimal results. 
-                  Higher timeframes should always be included first.
+                  💡 Pro Tip: The tool works with ANY timeframe you choose, but upload 6-8 screenshots covering at least 3 different 
+                  timeframes for optimal results. Higher timeframes should always be included first - this is how professional analysis works.
                 </p>
               </div>
             </CardContent>
