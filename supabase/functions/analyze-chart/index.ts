@@ -283,16 +283,22 @@ Charts are ordered by timeframe (higher to lower). Synthesize into ONE instituti
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error('[analyze-chart] Error:', error);
+    console.error('[analyze-chart] Detailed error:', error);
     
-    // Return generic error message to client, keep details in logs
-    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
-    const isValidationError = errorMessage.includes('Invalid') || errorMessage.includes('required') || errorMessage.includes('Maximum') || errorMessage.includes('exceeds');
+    // Return generic error message to client, keep details in logs only
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const isValidationError = errorMessage.includes('Invalid') || 
+                             errorMessage.includes('required') || 
+                             errorMessage.includes('Maximum') || 
+                             errorMessage.includes('exceeds');
+    
+    // For validation errors, provide specific feedback. For other errors, use generic message
+    const clientMessage = isValidationError 
+      ? errorMessage 
+      : 'Unable to analyze chart. Please try again.';
     
     return new Response(
-      JSON.stringify({ 
-        error: isValidationError ? errorMessage : 'Analysis failed. Please try again.'
-      }),
+      JSON.stringify({ error: clientMessage }),
       { 
         status: isValidationError ? 400 : 500, 
         headers: { ...corsHeaders, "Content-Type": "application/json" } 
