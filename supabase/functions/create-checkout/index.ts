@@ -64,15 +64,18 @@ serve(async (req) => {
       status: 200,
     });
   } catch (error) {
-    console.error('[create-checkout] Error:', error);
+    console.error('[create-checkout] Detailed error:', error);
     
+    // Return generic error to client, keep details in server logs only
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const isValidationError = errorMessage.includes('Invalid');
     
+    const clientMessage = isValidationError 
+      ? 'Invalid price selected. Please refresh and try again.'
+      : 'Unable to start checkout. Please try again.';
+    
     return new Response(
-      JSON.stringify({ 
-        error: isValidationError ? errorMessage : 'Failed to create checkout session. Please try again.'
-      }),
+      JSON.stringify({ error: clientMessage }),
       { 
         status: isValidationError ? 400 : 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
