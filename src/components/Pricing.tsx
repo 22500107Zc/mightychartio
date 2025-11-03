@@ -13,6 +13,7 @@ const tiers = [
     price: 44,
     generations: 11,
     priceId: "price_1SP9GjLs7KD65wZP1vT5W67z",
+    productId: "prod_TLqylNH5iKw3C4",
     description: "Perfect for getting started",
     featured: false,
   },
@@ -21,6 +22,7 @@ const tiers = [
     price: 77,
     generations: 33,
     priceId: "price_1SP9GwLs7KD65wZPiuSlXtBV",
+    productId: "prod_TLqyJvYY90VT8V",
     description: "Popular choice",
     featured: false,
   },
@@ -29,6 +31,7 @@ const tiers = [
     price: 144,
     generations: 77,
     priceId: "price_1SP9HILs7KD65wZPRUZaiGj8",
+    productId: "prod_TLqzRF5osRMCCg",
     description: "For serious traders",
     featured: false,
   },
@@ -37,6 +40,7 @@ const tiers = [
     price: 255,
     generations: 133,
     priceId: "price_1SP9HdLs7KD65wZPt1FdSy9Q",
+    productId: "prod_TLqzip2WAay0tq",
     description: "Ultimate trading power",
     featured: true,
   },
@@ -44,7 +48,8 @@ const tiers = [
     name: "Ultimate",
     price: 500,
     generations: 244,
-    priceId: SINGLE_GENERATION.priceId,
+    priceId: "price_1SP9UltimatePriceId",
+    productId: "prod_TLr0Ultimate123",
     description: "Maximum value package",
     featured: false,
   },
@@ -102,7 +107,7 @@ export const Pricing = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
           {sortedTiers.map((tier) => {
             const isCurrentTier = subscriptionStatus.subscribed && 
-              tier.priceId === subscriptionStatus.product_id;
+              tier.productId === subscriptionStatus.product_id;
             
             return (
               <Card 

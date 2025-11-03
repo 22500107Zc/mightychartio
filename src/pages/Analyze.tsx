@@ -200,12 +200,12 @@ export default function Analyze() {
                     />
                     <Label
                       htmlFor={size.value}
-                      className="flex items-start gap-3 p-4 rounded-lg border-2 border-border cursor-pointer transition-all hover:border-primary/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
+                      className="flex items-start gap-3 p-4 rounded-lg border-2 border-border cursor-pointer transition-all hover:border-primary/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 peer-data-[state=checked]:text-foreground"
                     >
                       <div className="w-5 h-5 rounded-full border-2 border-border peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary flex-shrink-0 mt-0.5" />
                       <div className="flex-1">
-                        <div className="font-semibold">{size.label}</div>
-                        <div className="text-sm text-muted-foreground">{size.description}</div>
+                        <div className="font-semibold text-foreground">{size.label}</div>
+                        <div className="text-sm text-muted-foreground peer-data-[state=checked]:text-foreground/80">{size.description}</div>
                       </div>
                     </Label>
                   </div>
@@ -232,12 +232,12 @@ export default function Analyze() {
                     />
                     <Label
                       htmlFor={strat.value}
-                      className="flex items-start gap-3 p-4 rounded-lg border-2 border-border cursor-pointer transition-all hover:border-primary/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
+                      className="flex items-start gap-3 p-4 rounded-lg border-2 border-border cursor-pointer transition-all hover:border-primary/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 peer-data-[state=checked]:text-foreground"
                     >
                       <div className="w-5 h-5 rounded-full border-2 border-border peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary flex-shrink-0 mt-0.5" />
                       <div className="flex-1">
-                        <div className="font-semibold">{strat.label}</div>
-                        <div className="text-sm text-muted-foreground">{strat.description}</div>
+                        <div className="font-semibold text-foreground">{strat.label}</div>
+                        <div className="text-sm text-muted-foreground peer-data-[state=checked]:text-foreground/80">{strat.description}</div>
                       </div>
                     </Label>
                   </div>
