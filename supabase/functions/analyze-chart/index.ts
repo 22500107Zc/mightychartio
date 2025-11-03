@@ -12,13 +12,47 @@ serve(async (req) => {
 
   try {
     const { images, strategy = "scalping" } = await req.json();
+    
+    // Validate inputs
+    const MAX_IMAGES = 8;
+    const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB per image
+    const VALID_STRATEGIES = ['scalping', 'day', 'swing', 'position', 'momentum', 'counter'];
+    
+    if (!Array.isArray(images) || images.length === 0) {
+      throw new Error('Images array is required and cannot be empty');
+    }
+    
+    if (images.length > MAX_IMAGES) {
+      throw new Error(`Maximum ${MAX_IMAGES} images allowed`);
+    }
+    
+    // Validate each image
+    for (const img of images) {
+      if (typeof img !== 'string' || !img.startsWith('data:image/')) {
+        throw new Error('Invalid image format. Must be base64 data URI');
+      }
+      
+      const base64Data = img.split(',')[1];
+      if (!base64Data) {
+        throw new Error('Invalid image data');
+      }
+      
+      const sizeBytes = (base64Data.length * 3) / 4;
+      if (sizeBytes > MAX_IMAGE_SIZE) {
+        throw new Error('Image size exceeds 5MB limit');
+      }
+    }
+    
+    if (strategy && !VALID_STRATEGIES.includes(strategy)) {
+      throw new Error('Invalid strategy. Must be one of: ' + VALID_STRATEGIES.join(', '));
+    }
+    
     const lovableApiKey = Deno.env.get("LOVABLE_API_KEY");
-
     if (!lovableApiKey) {
       throw new Error("LOVABLE_API_KEY not configured");
     }
 
-    console.log(`Analyzing ${images?.length || 0} charts using TJR Method...`);
+    console.log(`Analyzing ${images.length} validated charts using TJR Method...`);
 
     const systemPrompt = `You are an expert institutional trading analyst specializing in TJR Method with deep knowledge of smart money concepts, liquidity engineering, and multi-timeframe analysis.
 
@@ -249,13 +283,19 @@ Charts are ordered by timeframe (higher to lower). Synthesize into ONE instituti
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error in analyze-chart:", error);
-    const errorMessage = error instanceof Error ? error.message : "Failed to analyze chart";
+    console.error('[analyze-chart] Error:', error);
+    
+    // Return generic error message to client, keep details in logs
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+    const isValidationError = errorMessage.includes('Invalid') || errorMessage.includes('required') || errorMessage.includes('Maximum') || errorMessage.includes('exceeds');
+    
     return new Response(
-      JSON.stringify({ error: errorMessage }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      JSON.stringify({ 
+        error: isValidationError ? errorMessage : 'Analysis failed. Please try again.'
+      }),
+      { 
+        status: isValidationError ? 400 : 500, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" } 
       }
     );
   }

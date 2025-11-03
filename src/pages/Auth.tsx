@@ -8,6 +8,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { TrendingUp } from 'lucide-react';
+import { z } from 'zod';
+
+const passwordSchema = z.string()
+  .min(8, 'Password must be at least 8 characters')
+  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+  .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+  .regex(/[0-9]/, 'Password must contain at least one number')
+  .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character');
+
+const emailSchema = z.string().email('Invalid email address');
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -25,6 +35,18 @@ const Auth = () => {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate email
+    const emailValidation = emailSchema.safeParse(email);
+    if (!emailValidation.success) {
+      toast({
+        title: "Invalid email",
+        description: emailValidation.error.errors[0].message,
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setLoading(true);
     const { error } = await signIn(email, password);
     setLoading(false);
@@ -46,6 +68,29 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate email
+    const emailValidation = emailSchema.safeParse(email);
+    if (!emailValidation.success) {
+      toast({
+        title: "Invalid email",
+        description: emailValidation.error.errors[0].message,
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Validate password
+    const passwordValidation = passwordSchema.safeParse(password);
+    if (!passwordValidation.success) {
+      toast({
+        title: "Weak password",
+        description: passwordValidation.error.errors[0].message,
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setLoading(true);
     const { error } = await signUp(email, password);
     setLoading(false);
@@ -136,7 +181,7 @@ const Auth = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    minLength={6}
+                    minLength={8}
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>

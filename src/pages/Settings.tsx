@@ -11,6 +11,13 @@ import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
+import { z } from 'zod';
+
+const displayNameSchema = z.string()
+  .trim()
+  .min(1, 'Name cannot be empty')
+  .max(50, 'Name must be less than 50 characters')
+  .regex(/^[a-zA-Z0-9\s\-_]+$/, 'Only letters, numbers, spaces, hyphens and underscores allowed');
 
 const Settings = () => {
   const { user, loading } = useAuth();
@@ -51,11 +58,35 @@ const Settings = () => {
   };
 
   const saveSettings = async () => {
+    // Validate display name
+    const validation = displayNameSchema.safeParse(displayName);
+    if (!validation.success) {
+      toast({
+        title: "Invalid display name",
+        description: validation.error.errors[0].message,
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Validate language
+    if (!['en', 'es'].includes(language)) {
+      toast({
+        title: "Invalid language",
+        description: "Please select a valid language",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setSaving(true);
     try {
       const { error: profileError } = await supabase
         .from('profiles')
-        .update({ display_name: displayName, language: language })
+        .update({ 
+          display_name: displayName.trim(), 
+          language: language 
+        })
         .eq('user_id', user?.id);
 
       if (profileError) throw profileError;
