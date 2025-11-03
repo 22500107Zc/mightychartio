@@ -51,6 +51,9 @@ export const Navbar = () => {
                 <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
                   Pricing
                 </Link>
+                <Link to="/tips" className="text-sm hover:text-primary transition-colors">
+                  Tips & Tricks
+                </Link>
                 <Link to="/disclaimer" className="text-sm hover:text-primary transition-colors">
                   Disclaimer
                 </Link>
@@ -106,6 +109,9 @@ export const Navbar = () => {
                 <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
                   Pricing
                 </Link>
+                <Link to="/tips" className="text-sm hover:text-primary transition-colors">
+                  Tips & Tricks
+                </Link>
                 <Link to="/auth">
                   <Button size="sm" className="bg-gradient-primary hover:shadow-glow transition-all duration-300">
                     Sign In
@@ -134,6 +140,9 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Pricing
+                    </Link>
+                    <Link to="/tips" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      Tips & Tricks
                     </Link>
                     <Link to="/disclaimer" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Disclaimer
@@ -166,6 +175,9 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Pricing
+                    </Link>
+                    <Link to="/tips" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      Tips & Tricks
                     </Link>
                     <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
                       <Button size="sm" className="bg-gradient-primary hover:shadow-glow transition-all duration-300 w-full">

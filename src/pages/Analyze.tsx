@@ -134,11 +134,12 @@ export default function Analyze() {
                 <div className="flex items-start gap-3">
                   <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div className="text-sm">
-                    <p className="font-semibold text-primary mb-1">For Best Results:</p>
+                    <p className="font-semibold text-primary mb-1">Multi-Timeframe Analysis:</p>
                     <p className="text-foreground">
-                      Upload <strong>6-8 screenshots</strong> from multiple timeframes (1H, 4H, Daily, Weekly). 
-                      Include indicators: <strong>Volume, RSI, KDJ, MACD</strong> (always visible), and alternate between 
-                      <strong> Bollinger Bands & Ichimoku Cloud</strong>. More indicator data = higher accuracy.
+                      Upload multiple screenshots across different timeframes. The AI analyzes like a magnifying glass - 
+                      starting from higher timeframes (Weekly, Daily) to understand the big picture, then scaling down 
+                      through intermediate timeframes (4H, 1H) to pinpoint precise entries. Include <strong>Volume, RSI, KDJ, MACD</strong> 
+                      on all charts, alternating <strong>Bollinger Bands & Ichimoku Cloud</strong> between screenshots.
                     </p>
                   </div>
                 </div>
@@ -268,10 +269,10 @@ export default function Analyze() {
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <Upload className="w-12 h-12 mb-4 text-muted-foreground" />
                     <p className="mb-2 text-sm text-muted-foreground">
-                      <span className="font-semibold">Click to upload 6-8 screenshots</span> or drag and drop
+                      <span className="font-semibold">Click to upload multiple screenshots</span> or drag and drop
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Multiple timeframes (1H, 4H, Daily, etc.) - PNG, JPG (MAX. 8 images)
+                      Different timeframes (Weekly, Daily, 4H, 1H, etc.) - PNG, JPG (MAX. 8 images)
                     </p>
                   </div>
                   <input
