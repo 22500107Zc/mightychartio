@@ -32,6 +32,7 @@ const Dashboard = () => {
   const [trades, setTrades] = useState<Trade[]>([]);
   const [loadingTrades, setLoadingTrades] = useState(true);
   const [managingSubscription, setManagingSubscription] = useState(false);
+  const [displayName, setDisplayName] = useState<string>('trader');
 
   useEffect(() => {
     if (!loading && !user) {
@@ -42,8 +43,32 @@ const Dashboard = () => {
   useEffect(() => {
     if (user) {
       fetchTrades();
+      fetchDisplayName();
     }
   }, [user]);
+
+  const fetchDisplayName = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('display_name')
+        .eq('user_id', user?.id)
+        .single();
+
+      if (error) {
+        console.error('Error fetching display name:', error);
+        setDisplayName('trader');
+        return;
+      }
+
+      // Set display name or default to 'trader' if empty/null
+      const name = data?.display_name?.trim();
+      setDisplayName(name && name.length > 0 ? name : 'trader');
+    } catch (error) {
+      console.error('Error fetching display name:', error);
+      setDisplayName('trader');
+    }
+  };
 
   const fetchTrades = async () => {
     try {
@@ -168,7 +193,9 @@ const Dashboard = () => {
         <Navbar />
         <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
+          <h1 className="text-4xl font-bold mb-2">
+            Welcome back, <span className="text-primary">{displayName}</span>
+          </h1>
           <p className="text-muted-foreground">Track your trading performance</p>
         </div>
 
