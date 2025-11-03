@@ -6,7 +6,6 @@ import { ExampleAnalysis } from "@/components/ExampleAnalysis";
 import { Comparison } from "@/components/Comparison";
 import { Testimonials } from "@/components/Testimonials";
 import { Footer } from "@/components/Footer";
-import { ApprovalBanner } from "@/components/ApprovalBanner";
 
 const Index = () => {
   return (
@@ -14,7 +13,6 @@ const Index = () => {
       <div className="purple-overlay" />
       <div className="content-wrapper">
         <Navbar />
-        <ApprovalBanner />
         <Hero />
         <TrustSignals />
         <div id="features">
