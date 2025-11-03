@@ -4,24 +4,9 @@ import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden pt-24">
       <div className="container relative z-10 px-4 md:px-6">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-          {/* Scrolling Approval Banner */}
-          <div className="w-full max-w-3xl overflow-hidden">
-            <div className="animate-scroll-left whitespace-nowrap inline-flex">
-              {[...Array(10)].map((_, i) => (
-                <div key={i} className="inline-flex items-center gap-3 px-6 py-3 mx-3 bg-card/50 backdrop-blur-sm border border-accent/30 rounded-full">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-red-500 via-white to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md">
-                    <span className="text-xs">🇺🇸</span>
-                  </div>
-                  <span className="text-sm font-medium text-foreground">
-                    Now approved to operate in USA jurisdiction — North American approval in the works
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
