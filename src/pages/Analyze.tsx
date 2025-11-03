@@ -286,7 +286,7 @@ export default function Analyze() {
                         <div className="text-center">
                           <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
                           <p className="text-sm text-muted-foreground">
-                            Analyzing multi-timeframe setup with TJR Method...
+                            Generating analysis...
                           </p>
                         </div>
                       </div>

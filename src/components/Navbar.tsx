@@ -48,9 +48,6 @@ export const Navbar = () => {
                 <Link to="/analyze" className="text-sm hover:text-primary transition-colors">
                   Analyze
                 </Link>
-                <Link to="/trade-management" className="text-sm hover:text-primary transition-colors">
-                  Manage Trades
-                </Link>
                 <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
                   Pricing
                 </Link>
@@ -131,9 +128,6 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/analyze" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Analyze
-                    </Link>
-                    <Link to="/trade-management" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                      Manage Trades
                     </Link>
                     <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Pricing
