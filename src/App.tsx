@@ -15,6 +15,7 @@ import Pricing from "./pages/Pricing";
 import Disclaimer from "./pages/Disclaimer";
 import TipsTricks from "./pages/TipsTricks";
 import NotFound from "./pages/NotFound";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/analyze" element={<Analyze />} />

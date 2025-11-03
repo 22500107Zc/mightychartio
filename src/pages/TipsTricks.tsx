@@ -94,6 +94,8 @@ const TipsTricks = () => {
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li><strong>Bollinger Bands:</strong> Use on 3-4 screenshots to show volatility and price extremes</li>
                     <li><strong>Ichimoku Cloud:</strong> Use on 3-4 other screenshots to reveal trend strength and support/resistance</li>
+                    <li><strong>MA (Moving Average):</strong> Include on 2-3 screenshots to track price trend direction</li>
+                    <li><strong>EMA (Exponential Moving Average):</strong> Add to 2-3 screenshots for faster trend signals</li>
                   </ul>
                 </div>
               </div>
