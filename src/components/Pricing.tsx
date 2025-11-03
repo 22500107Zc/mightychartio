@@ -44,15 +44,6 @@ const tiers = [
     description: "Ultimate trading power",
     featured: true,
   },
-  {
-    name: "Ultimate",
-    price: 500,
-    generations: 255,
-    priceId: "price_1SPWrxLs7KD65wZPJlre0jkT",
-    productId: "prod_TMFMcKUlNY2dFg",
-    description: "Maximum value package",
-    featured: false,
-  },
 ];
 
 export const Pricing = () => {
@@ -104,7 +95,7 @@ export const Pricing = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {sortedTiers.map((tier) => {
             const isCurrentTier = subscriptionStatus.subscribed && 
               tier.productId === subscriptionStatus.product_id;
