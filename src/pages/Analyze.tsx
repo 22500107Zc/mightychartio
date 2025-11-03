@@ -20,6 +20,13 @@ const tradingStrategies = [
   { value: "counter", label: "Counter-Trend", description: "Reversal patterns" },
 ];
 
+const tradeSizes = [
+  { value: "small", label: "Small", description: "Conservative position size" },
+  { value: "medium", label: "Medium", description: "Balanced risk/reward" },
+  { value: "big", label: "Big", description: "Larger position size" },
+  { value: "massive", label: "Massive", description: "Maximum position size" },
+];
+
 export default function Analyze() {
   const { user, loading } = useAuth();
   const { subscriptionStatus, canGenerate, incrementGenerationUsage, currentTier } = useSubscription();
@@ -28,6 +35,7 @@ export default function Analyze() {
   const [result, setResult] = useState<any>(null);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [strategy, setStrategy] = useState("scalping");
+  const [tradeSize, setTradeSize] = useState("medium");
 
   useEffect(() => {
     if (!loading && !user) {
@@ -87,7 +95,7 @@ export default function Analyze() {
 
       // Call edge function with multiple images
       const { data, error } = await supabase.functions.invoke("analyze-chart", {
-        body: { images: base64Images, strategy },
+        body: { images: base64Images, strategy, tradeSize },
       });
 
       if (error) throw error;
@@ -172,6 +180,38 @@ export default function Analyze() {
 
           <Card className="bg-card/50 backdrop-blur-sm border-border mb-8">
             <CardContent className="p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold">Trade Size</h2>
+                  <p className="text-sm text-muted-foreground">Select your position size before analyzing</p>
+                </div>
+              </div>
+              
+              <RadioGroup value={tradeSize} onValueChange={setTradeSize} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {tradeSizes.map((size) => (
+                  <div key={size.value} className="relative">
+                    <RadioGroupItem
+                      value={size.value}
+                      id={size.value}
+                      className="peer sr-only"
+                    />
+                    <Label
+                      htmlFor={size.value}
+                      className="flex items-start gap-3 p-4 rounded-lg border-2 border-border cursor-pointer transition-all hover:border-primary/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
+                    >
+                      <div className="w-5 h-5 rounded-full border-2 border-border peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary flex-shrink-0 mt-0.5" />
+                      <div className="flex-1">
+                        <div className="font-semibold">{size.label}</div>
+                        <div className="text-sm text-muted-foreground">{size.description}</div>
+                      </div>
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
                   <Zap className="w-6 h-6 text-primary" />
@@ -286,73 +326,17 @@ export default function Analyze() {
                         </Card>
                       </div>
 
-                      {/* Trading Action Buttons */}
-                      <div>
-                        <h3 className="text-xl font-semibold mb-4">Take Trade</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                          <Button
-                            size="lg"
-                            className="h-20 text-2xl font-bold bg-gradient-to-br from-success to-success/80 hover:from-success/90 hover:to-success/70"
-                            onClick={async () => {
-                              try {
-                                await supabase.from('trades').insert({
-                                  user_id: user?.id,
-                                  entry_price: parseFloat(result.entry?.replace(/[^0-9.-]/g, '') || '0'),
-                                  stop_loss: parseFloat(result.stopLoss?.replace(/[^0-9.-]/g, '') || '0'),
-                                  take_profit: parseFloat(result.target?.replace(/[^0-9.-]/g, '') || '0'),
-                                  pnl: parseFloat(result.targetGain?.replace(/[^0-9.-]/g, '') || '0'),
-                                  recommendation: 'BUY',
-                                  strategy: strategy,
-                                  pattern: result.pattern,
-                                  timeframe: result.timeframe,
-                                  leverage: result.leverage,
-                                  risk_percent: parseFloat(result.riskPercent?.replace(/[^0-9.-]/g, '') || '0'),
-                                  probability: parseFloat(result.probability?.replace(/[^0-9.-]/g, '') || '0')
-                                });
-                                toast.success("Buy trade saved!");
-                                navigate('/trade-management');
-                              } catch (error: any) {
-                                toast.error("Failed to save trade: " + error.message);
-                              }
-                            }}
-                          >
-                            BUY
-                          </Button>
-                          <Button
-                            size="lg"
-                            className="h-20 text-2xl font-bold bg-gradient-to-br from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive/70"
-                            onClick={async () => {
-                              try {
-                                await supabase.from('trades').insert({
-                                  user_id: user?.id,
-                                  entry_price: parseFloat(result.entry?.replace(/[^0-9.-]/g, '') || '0'),
-                                  stop_loss: parseFloat(result.stopLoss?.replace(/[^0-9.-]/g, '') || '0'),
-                                  take_profit: parseFloat(result.target?.replace(/[^0-9.-]/g, '') || '0'),
-                                  pnl: parseFloat(result.targetGain?.replace(/[^0-9.-]/g, '') || '0'),
-                                  recommendation: 'SELL',
-                                  strategy: strategy,
-                                  pattern: result.pattern,
-                                  timeframe: result.timeframe,
-                                  leverage: result.leverage,
-                                  risk_percent: parseFloat(result.riskPercent?.replace(/[^0-9.-]/g, '') || '0'),
-                                  probability: parseFloat(result.probability?.replace(/[^0-9.-]/g, '') || '0')
-                                });
-                                toast.success("Sell trade saved!");
-                                navigate('/trade-management');
-                              } catch (error: any) {
-                                toast.error("Failed to save trade: " + error.message);
-                              }
-                            }}
-                          >
-                            SELL
-                          </Button>
-                        </div>
-                        <p className="text-center text-sm text-muted-foreground mt-4">
-                          AI Recommendation: <span className={`font-bold ${
-                            result.recommendation === "BUY" ? "text-success" : "text-destructive"
-                          }`}>{result.recommendation}</span> - {result.reasoningShort}
-                        </p>
-                      </div>
+                      {/* AI Recommendation */}
+                      <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30">
+                        <CardContent className="p-6">
+                          <p className="text-center text-lg">
+                            AI Recommendation: <span className={`font-bold text-xl ${
+                              result.recommendation === "BUY" ? "text-success" : "text-destructive"
+                            }`}>{result.recommendation}</span>
+                          </p>
+                          <p className="text-center text-muted-foreground mt-2">{result.reasoningShort}</p>
+                        </CardContent>
+                      </Card>
 
                       {/* Not Optimal Warning */}
                       {!result.optimalEntry && (
@@ -455,8 +439,7 @@ export default function Analyze() {
                               <div className="flex items-center justify-between">
                                 <div>
                                   <div className="text-sm text-green-300 mb-1">Take Profit 1 (Conservative)</div>
-                                  <div className="text-3xl font-bold mb-1">{result.target}</div>
-                                  <div className="text-success font-semibold">{result.targetGain} gain</div>
+                                  <div className="text-3xl font-bold">{result.target}</div>
                                 </div>
                                 <div className="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center">
                                   <TrendingUp className="w-5 h-5 text-success" />
