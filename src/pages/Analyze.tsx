@@ -140,8 +140,9 @@ export default function Analyze() {
                     <p className="text-foreground">
                       Upload multiple screenshots across different timeframes. The AI analyzes like a magnifying glass - 
                       starting from higher timeframes (Weekly, Daily) to understand the big picture, then scaling down 
-                      through intermediate timeframes (4H, 1H) to pinpoint precise entries. Include <strong>Volume, RSI, KDJ, MACD</strong> 
-                      on all charts, alternating <strong>Bollinger Bands & Ichimoku Cloud</strong> between screenshots.
+                      through intermediate timeframes (4H, 1H) to pinpoint precise entries. Include key technical indicators 
+                      on your charts—overlay indicators like trend and volatility bands along with oscillators like momentum 
+                      and volume indicators give the AI comprehensive data for accurate analysis.
                     </p>
                   </div>
                 </div>
