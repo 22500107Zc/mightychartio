@@ -83,7 +83,7 @@ export const Comparison = () => {
               </div>
               <div className="flex items-start gap-3">
                 <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-foreground font-medium">87% average success rate</span>
+                <span className="text-foreground font-medium">89% average success rate</span>
               </div>
             </CardContent>
           </Card>
