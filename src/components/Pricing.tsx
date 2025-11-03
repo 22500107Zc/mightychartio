@@ -9,6 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const tiers = [
   {
+    name: "Ultimate",
+    price: 500,
+    generations: 244,
+    priceId: SINGLE_GENERATION.priceId,
+    description: "Maximum value package",
+    featured: true,
+  },
+  {
     name: "Starter",
     price: 44,
     generations: 11,
@@ -21,8 +29,8 @@ const tiers = [
     price: 77,
     generations: 33,
     priceId: "price_1SP9GwLs7KD65wZPiuSlXtBV",
-    description: "Most popular choice",
-    featured: true,
+    description: "Popular choice",
+    featured: false,
   },
   {
     name: "Premium",
@@ -76,7 +84,7 @@ export const Pricing = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
           {tiers.map((tier) => {
             const isCurrentTier = subscriptionStatus.subscribed && 
               tier.priceId === subscriptionStatus.product_id;
@@ -160,46 +168,6 @@ export const Pricing = () => {
               </Card>
             );
           })}
-        </div>
-
-        <div className="max-w-md mx-auto">
-          <Card className="bg-card/80 backdrop-blur-sm border-border">
-            <CardHeader className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-6 h-6 text-primary" />
-              </div>
-              <CardTitle className="text-2xl font-bold">Pay As You Go</CardTitle>
-              <CardDescription>
-                244 generations for $500
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-center">
-              <div className="text-3xl font-bold mb-4">
-                $500
-              </div>
-              <div className="text-sm text-muted-foreground mb-2">
-                244 generations
-              </div>
-              <div className="text-xs text-muted-foreground mb-6">
-                $2.05/generation
-              </div>
-              <Button 
-                className="w-full"
-                variant="outline"
-                onClick={() => handleSubscribe(SINGLE_GENERATION.priceId, "Bulk Package")}
-                disabled={loading === SINGLE_GENERATION.priceId}
-              >
-                {loading === SINGLE_GENERATION.priceId ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  "Buy 244 Generations"
-                )}
-              </Button>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </section>
