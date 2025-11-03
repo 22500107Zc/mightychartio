@@ -9,14 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 const tiers = [
   {
-    name: "Ultimate",
-    price: 500,
-    generations: 244,
-    priceId: SINGLE_GENERATION.priceId,
-    description: "Maximum value package",
-    featured: false,
-  },
-  {
     name: "Starter",
     price: 44,
     generations: 11,
@@ -48,6 +40,14 @@ const tiers = [
     description: "Ultimate trading power",
     featured: true,
   },
+  {
+    name: "Ultimate",
+    price: 500,
+    generations: 244,
+    priceId: SINGLE_GENERATION.priceId,
+    description: "Maximum value package",
+    featured: false,
+  },
 ];
 
 export const Pricing = () => {
@@ -55,6 +55,11 @@ export const Pricing = () => {
   const { createCheckout, subscriptionStatus } = useSubscription();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
+  const sortedTiers = [...tiers].sort((a, b) => {
+    return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+  });
 
   const handleSubscribe = async (priceId: string, tierName: string) => {
     if (!user) {
@@ -78,14 +83,24 @@ export const Pricing = () => {
   return (
     <section className="py-24 px-4 md:px-6 bg-gradient-hero">
       <div className="container mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Choose Your Plan
           </h2>
         </div>
 
+        <div className="flex justify-center mb-8">
+          <Button
+            variant="outline"
+            onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+            className="gap-2"
+          >
+            Sort by Price: {sortOrder === "asc" ? "Low to High" : "High to Low"}
+          </Button>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-          {tiers.map((tier) => {
+          {sortedTiers.map((tier) => {
             const isCurrentTier = subscriptionStatus.subscribed && 
               tier.priceId === subscriptionStatus.product_id;
             
