@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Zap, Shield, LineChart, DollarSign, BookOpen } from "lucide-react";
+import { TrendingUp, Zap, Shield, LineChart, DollarSign } from "lucide-react";
 
 const features = [
   {
@@ -26,11 +26,6 @@ const features = [
     icon: DollarSign,
     title: "Swing Trading Analysis",
     description: "Identify optimal entry and exit points with our AI-powered swing trading pattern recognition.",
-  },
-  {
-    icon: BookOpen,
-    title: "Trade Journaling",
-    description: "Track your trading progress with our comprehensive journaling system to improve consistency.",
   },
 ];
 
