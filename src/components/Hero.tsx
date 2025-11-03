@@ -38,12 +38,16 @@ export const Hero = () => {
               <div className="text-4xl md:text-5xl font-bold text-accent">8sec</div>
               <div className="text-sm text-muted-foreground mt-1">Analysis Speed</div>
             </div>
+            <div className="flex flex-col items-center">
+              <div className="text-4xl md:text-5xl font-bold text-accent">12,400+</div>
+              <div className="text-sm text-muted-foreground mt-1">Active Traders</div>
+            </div>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link to="/analyze">
-              <Button size="lg" className="bg-gradient-primary hover:shadow-glow transition-all duration-300 text-lg px-8">
+              <Button size="lg" className="bg-primary hover:shadow-glow transition-all duration-300 text-lg px-8">
                 Start Analyzing
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

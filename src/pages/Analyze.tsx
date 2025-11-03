@@ -187,7 +187,7 @@ export default function Analyze() {
                     <Button 
                       size="sm" 
                       onClick={() => navigate('/pricing')}
-                      className="bg-gradient-primary"
+                      className="bg-primary"
                     >
                       Subscribe
                     </Button>

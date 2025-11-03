@@ -246,7 +246,7 @@ const Dashboard = () => {
                     </p>
                     <Button 
                       size="sm" 
-                      className="mt-2 bg-gradient-primary"
+                      className="mt-2 bg-primary"
                       onClick={() => navigate('/pricing')}
                     >
                       View Plans
@@ -260,7 +260,7 @@ const Dashboard = () => {
                   No active subscription. Subscribe to start analyzing charts with AI.
                 </p>
                 <Button 
-                  className="bg-gradient-primary"
+                  className="bg-primary"
                   onClick={() => navigate('/pricing')}
                 >
                   View Subscription Plans

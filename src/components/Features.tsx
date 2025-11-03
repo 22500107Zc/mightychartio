@@ -36,7 +36,7 @@ export const Features = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Everything you need for{" "}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="text-primary">
               data-driven trading
             </span>
           </h2>
@@ -51,7 +51,7 @@ export const Features = () => {
             return (
               <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow">
                 <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>

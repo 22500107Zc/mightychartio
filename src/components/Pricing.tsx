@@ -86,7 +86,7 @@ export const Pricing = () => {
   };
 
   return (
-    <section className="py-24 px-4 md:px-6 bg-gradient-hero">
+    <section className="py-24 px-4 md:px-6 bg-background">
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
@@ -118,7 +118,7 @@ export const Pricing = () => {
               >
                 {tier.featured && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="bg-gradient-primary px-4 py-1 rounded-full text-sm font-semibold">
+                    <div className="bg-primary px-4 py-1 rounded-full text-sm font-semibold">
                       Most Purchased
                     </div>
                   </div>
