@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { TrendingUp, LogOut, Settings as SettingsIcon, Menu, X, ExternalLink } from "lucide-react";
+import { LogOut, Settings as SettingsIcon, Menu, X, ExternalLink } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import logo from "@/assets/mightychart-logo.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,9 +34,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-12">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <TrendingUp className="w-4 h-4 text-white" />
-            </div>
+            <img src={logo} alt="MightyChart.io" className="w-7 h-7" />
             <span className="font-bold text-lg">MightyChart.io</span>
           </Link>
 

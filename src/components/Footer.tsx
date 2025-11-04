@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { TrendingUp } from "lucide-react";
+import logo from "@/assets/mightychart-logo.png";
 
 export const Footer = () => {
   return (
@@ -7,7 +7,7 @@ export const Footer = () => {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <TrendingUp className="w-6 h-6 text-primary" />
+            <img src={logo} alt="MightyChart.io" className="w-6 h-6" />
             <span className="text-xl font-bold">MightyChart.io</span>
           </div>
           
