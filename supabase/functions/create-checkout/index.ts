@@ -8,6 +8,8 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('[create-checkout] Function invoked');
+  
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -18,13 +20,16 @@ serve(async (req) => {
   );
 
   try {
+    console.log('[create-checkout] Starting authentication');
     const authHeader = req.headers.get("Authorization")!;
     const token = authHeader.replace("Bearer ", "");
     const { data } = await supabaseClient.auth.getUser(token);
     const user = data.user;
     if (!user?.email) throw new Error("User not authenticated or email not available");
+    console.log('[create-checkout] User authenticated:', user.email);
 
     const { priceId } = await req.json();
+    console.log('[create-checkout] Received priceId:', priceId);
     
     // Validate price ID format
     if (!priceId || typeof priceId !== 'string') {
@@ -38,13 +43,18 @@ serve(async (req) => {
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { 
       apiVersion: "2024-12-18.acacia" 
     });
+    console.log('[create-checkout] Stripe client initialized');
 
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
+      console.log('[create-checkout] Existing customer found:', customerId);
+    } else {
+      console.log('[create-checkout] No existing customer, will create new');
     }
 
+    console.log('[create-checkout] Creating checkout session');
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
@@ -58,13 +68,17 @@ serve(async (req) => {
       success_url: `${req.headers.get("origin")}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/pricing`,
     });
+    
+    console.log('[create-checkout] Checkout session created successfully:', session.id);
+    console.log('[create-checkout] Checkout URL:', session.url);
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error) {
-    console.error('[create-checkout] Detailed error:', error);
+    console.error('[create-checkout] ERROR:', error);
+    console.error('[create-checkout] Error details:', JSON.stringify(error, null, 2));
     
     // Return generic error to client, keep details in server logs only
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';

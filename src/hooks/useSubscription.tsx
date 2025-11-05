@@ -150,9 +150,15 @@ export const useSubscription = () => {
 
     if (error) {
       console.error('[useSubscription] create-checkout error:', error);
-      throw error;
+      throw new Error(error.message || 'Failed to create checkout session');
     }
 
+    if (!data?.url) {
+      console.error('[useSubscription] No URL in response:', data);
+      throw new Error(data?.error || 'No checkout URL received');
+    }
+
+    console.log('[useSubscription] Checkout URL received:', data.url);
     return data.url;
   };
 
