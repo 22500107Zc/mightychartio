@@ -64,7 +64,10 @@ export const useSubscription = () => {
   const [error, setError] = useState<string | null>(null);
 
   const checkSubscription = useCallback(async () => {
+    console.log('[useSubscription] checkSubscription called', { user: user?.email, hasSession: !!session });
+    
     if (!user || !session) {
+      console.log('[useSubscription] No user or session, setting unsubscribed');
       setSubscriptionStatus({
         subscribed: false,
         generations_limit: 0,
@@ -77,6 +80,7 @@ export const useSubscription = () => {
 
     // Owner has unlimited access
     if (user.email === OWNER_EMAIL) {
+      console.log('[useSubscription] Owner detected, unlimited access');
       setSubscriptionStatus({
         subscribed: true,
         generations_limit: 999999,
@@ -90,18 +94,26 @@ export const useSubscription = () => {
 
     try {
       setLoading(true);
+      console.log('[useSubscription] Invoking check-subscription function');
+      
       const { data, error } = await supabase.functions.invoke('check-subscription', {
         headers: {
           Authorization: `Bearer ${session.access_token}`,
         },
       });
 
-      if (error) throw error;
+      console.log('[useSubscription] check-subscription response:', { data, error });
+
+      if (error) {
+        console.error('[useSubscription] check-subscription error:', error);
+        throw error;
+      }
 
       setSubscriptionStatus(data);
       setError(null);
+      console.log('[useSubscription] Subscription status updated:', data);
     } catch (err: any) {
-      console.error('Error checking subscription:', err);
+      console.error('[useSubscription] Error checking subscription:', err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -118,10 +130,15 @@ export const useSubscription = () => {
   }, [checkSubscription]);
 
   const createCheckout = async (priceId: string) => {
+    console.log('[useSubscription] createCheckout called with priceId:', priceId);
+    
     if (!session) {
+      console.error('[useSubscription] No session, cannot create checkout');
       throw new Error('Must be logged in to subscribe');
     }
 
+    console.log('[useSubscription] Invoking create-checkout function');
+    
     const { data, error } = await supabase.functions.invoke('create-checkout', {
       body: { priceId },
       headers: {
@@ -129,7 +146,12 @@ export const useSubscription = () => {
       },
     });
 
-    if (error) throw error;
+    console.log('[useSubscription] create-checkout response:', { data, error });
+
+    if (error) {
+      console.error('[useSubscription] create-checkout error:', error);
+      throw error;
+    }
 
     return data.url;
   };
