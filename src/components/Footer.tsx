@@ -15,9 +15,6 @@ export const Footer = () => {
             <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
               Home
             </Link>
-            <Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
-              Pricing
-            </Link>
             <Link to="/analyze" className="text-muted-foreground hover:text-foreground transition-colors">
               Analyze
             </Link>
@@ -26,6 +23,9 @@ export const Footer = () => {
             </Link>
             <Link to="/tips" className="text-muted-foreground hover:text-foreground transition-colors">
               Tips & Tricks
+            </Link>
+            <Link to="/feedback" className="text-muted-foreground hover:text-foreground transition-colors">
+              Feedback
             </Link>
             <Link to="/disclaimer" className="text-muted-foreground hover:text-foreground transition-colors">
               Disclaimer

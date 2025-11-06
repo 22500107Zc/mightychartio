@@ -10,17 +10,17 @@ export const Hero = () => {
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            Trade with{" "}
+            Your Trading{" "}
             <span className="text-primary">
-              AI precision
+              Confluence Engine
             </span>
             <br />
-            not gut feelings.
+            Powered by AI
           </h1>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
-            Upload your chart and get instant AI analysis with precise entry/exit points based on proven patterns.
+            Upload your chart and get instant AI-powered confluence analysis with precise entry/exit points based on proven patterns.
           </p>
 
           {/* Stats */}
@@ -43,13 +43,13 @@ export const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link to="/analyze">
               <Button size="lg" className="bg-primary hover:shadow-glow transition-all duration-300 text-lg px-8">
-                Start Analyzing
+                Start Analysis
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <Link to="/pricing">
+            <Link to="/feedback">
               <Button size="lg" variant="outline" className="text-lg px-8 border-primary/30 hover:bg-primary/10">
-                View Pricing
+                Give Feedback
               </Button>
             </Link>
           </div>

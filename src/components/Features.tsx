@@ -4,28 +4,28 @@ import { TrendingUp, Zap, Shield, LineChart, DollarSign } from "lucide-react";
 const features = [
   {
     icon: TrendingUp,
-    title: "AI Trade Analysis",
-    description: "Get detailed trade reviews with our AI that analyzes your chart patterns and trading decisions.",
+    title: "AI Confluence Engine",
+    description: "Get detailed confluence analysis with our AI that identifies multiple confirming signals across your chart patterns and trading decisions.",
   },
   {
     icon: Zap,
-    title: "Scalp Trading Analysis",
-    description: "Discover short-term opportunities with lightning-fast AI analysis for scalp traders.",
+    title: "Scalp Trading Confluence",
+    description: "Discover short-term opportunities with lightning-fast AI confluence detection for scalp traders.",
   },
   {
     icon: LineChart,
-    title: "Price Action Analysis",
-    description: "Understand key support, resistance levels and market structure with AI-driven insights.",
+    title: "Price Action Confluence",
+    description: "Understand key support, resistance levels and market structure with AI-driven confluence insights.",
   },
   {
     icon: Shield,
     title: "Risk Management",
-    description: "Optimize your position sizes and see potential returns based on AI-calculated risk profiles.",
+    description: "Optimize your position sizes and see potential returns based on AI-calculated confluence and risk profiles.",
   },
   {
     icon: DollarSign,
-    title: "Swing Trading Analysis",
-    description: "Identify optimal entry and exit points with our AI-powered swing trading pattern recognition.",
+    title: "Swing Trading Confluence",
+    description: "Identify optimal entry and exit points with our AI-powered confluence pattern recognition.",
   },
 ];
 
