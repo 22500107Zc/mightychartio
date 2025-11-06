@@ -14,6 +14,7 @@ import TradeManagement from "./pages/TradeManagement";
 import Pricing from "./pages/Pricing";
 import Disclaimer from "./pages/Disclaimer";
 import TipsTricks from "./pages/TipsTricks";
+import Feedback from "./pages/Feedback";
 import NotFound from "./pages/NotFound";
 import { ScrollToTop } from "./components/ScrollToTop";
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/disclaimer" element={<Disclaimer />} />
             <Route path="/tips" element={<TipsTricks />} />
+            <Route path="/feedback" element={<Feedback />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

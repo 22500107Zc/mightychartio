@@ -50,17 +50,17 @@ export const Features = () => {
             const Icon = feature.icon;
             return (
               <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
+              <CardHeader>
+                <div className="w-14 h-14 rounded-lg bg-primary flex items-center justify-center mb-4">
+                  <Icon className="w-7 h-7 text-white" />
+                </div>
+                <CardTitle className="text-2xl">{feature.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </CardDescription>
+              </CardContent>
               </Card>
             );
           })}

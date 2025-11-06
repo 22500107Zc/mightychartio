@@ -104,7 +104,7 @@ export default function Analyze() {
       await incrementGenerationUsage();
 
       setResult(data);
-      toast.success("Multi-timeframe analysis complete!");
+      toast.success("Multi-timeframe confluence analysis complete!");
     } catch (error: any) {
       console.error("Analysis error:", error);
       toast.error(error.message || "Failed to analyze charts");
@@ -132,17 +132,17 @@ export default function Analyze() {
                 Upload your trading chart and get instant AI-powered confluence analysis
             </p>
             <Card className="max-w-3xl mx-auto bg-primary/10 border-primary/30">
-              <CardContent className="p-4">
+              <CardContent className="p-6">
                 <div className="flex items-start gap-3">
-                  <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <div className="text-sm">
-                    <p className="font-semibold text-primary mb-1">Multi-Timeframe Analysis:</p>
-                    <p className="text-foreground">
+                  <AlertTriangle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                  <div className="text-base">
+                    <p className="font-semibold text-primary mb-2 text-lg">Multi-Timeframe Confluence Analysis:</p>
+                    <p className="text-foreground leading-relaxed">
                       Upload multiple screenshots across different timeframes. The AI analyzes like a magnifying glass - 
                       starting from higher timeframes (Weekly, Daily) to understand the big picture, then scaling down 
                       through intermediate timeframes (4H, 1H) to pinpoint precise entries. Include key technical indicators 
                       on your charts—overlay indicators like trend and volatility bands along with oscillators like momentum 
-                      and volume indicators give the AI comprehensive data for accurate analysis.
+                      and volume indicators give the AI comprehensive data for accurate confluence analysis.
                     </p>
                   </div>
                 </div>

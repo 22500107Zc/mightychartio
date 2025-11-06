@@ -41,19 +41,19 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             {user ? (
               <>
-                <Link to="/dashboard" className="text-sm hover:text-primary transition-colors">
+                <Link to="/dashboard" className="text-base hover:text-primary transition-colors">
                   Dashboard
                 </Link>
-                <Link to="/analyze" className="text-sm hover:text-primary transition-colors">
+                <Link to="/analyze" className="text-base hover:text-primary transition-colors">
                   Analyze
                 </Link>
-                <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
-                  Pricing
+                <Link to="/feedback" className="text-base hover:text-primary transition-colors">
+                  Feedback
                 </Link>
-                <Link to="/tips" className="text-sm hover:text-primary transition-colors">
+                <Link to="/tips" className="text-base hover:text-primary transition-colors">
                   Tips & Tricks
                 </Link>
-                <Link to="/disclaimer" className="text-sm hover:text-primary transition-colors">
+                <Link to="/disclaimer" className="text-base hover:text-primary transition-colors">
                   Disclaimer
                 </Link>
                 <DropdownMenu>
@@ -102,13 +102,13 @@ export const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to="/#features" className="text-sm hover:text-primary transition-colors">
+                <Link to="/#features" className="text-base hover:text-primary transition-colors">
                   Features
                 </Link>
-                <Link to="/pricing" className="text-sm hover:text-primary transition-colors">
-                  Pricing
+                <Link to="/feedback" className="text-base hover:text-primary transition-colors">
+                  Feedback
                 </Link>
-                <Link to="/tips" className="text-sm hover:text-primary transition-colors">
+                <Link to="/tips" className="text-base hover:text-primary transition-colors">
                   Tips & Tricks
                 </Link>
                 <Link to="/auth">
@@ -131,34 +131,34 @@ export const Navbar = () => {
               <div className="flex flex-col gap-4 mt-8">
                 {user ? (
                   <>
-                    <Link to="/dashboard" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/dashboard" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Dashboard
                     </Link>
-                    <Link to="/analyze" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/analyze" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Analyze
                     </Link>
-                    <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                      Pricing
+                    <Link to="/feedback" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      Feedback
                     </Link>
-                    <Link to="/tips" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/tips" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Tips & Tricks
                     </Link>
-                    <Link to="/disclaimer" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/disclaimer" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Disclaimer
                     </Link>
-                    <Link to="/settings" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/settings" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Settings
                     </Link>
-                    <Link to="/admin" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/admin" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Admin Panel
                     </Link>
                     <div className="border-t pt-4">
                       <p className="text-xs text-muted-foreground mb-2">Resources</p>
-                      <a href="https://www.tradingview.com" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-primary transition-colors flex items-center gap-2 mb-2">
+                      <a href="https://www.tradingview.com" target="_blank" rel="noopener noreferrer" className="text-base hover:text-primary transition-colors flex items-center gap-2 mb-2">
                         <ExternalLink className="h-4 w-4" />
                         TradingView
                       </a>
-                      <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-primary transition-colors flex items-center gap-2 mb-2">
+                      <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener noreferrer" className="text-base hover:text-primary transition-colors flex items-center gap-2 mb-2">
                         <ExternalLink className="h-4 w-4" />
                         Pine Script Docs
                       </a>
@@ -169,13 +169,13 @@ export const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <Link to="/#features" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/#features" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Features
                     </Link>
-                    <Link to="/pricing" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                      Pricing
+                    <Link to="/feedback" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                      Feedback
                     </Link>
-                    <Link to="/tips" className="text-sm hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/tips" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Tips & Tricks
                     </Link>
                     <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>

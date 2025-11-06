@@ -14,7 +14,6 @@ const Index = () => {
       <div className="purple-overlay" />
       <div className="content-wrapper">
         <Navbar />
-        <ApprovalBanner />
         <Hero />
         <TrustSignals />
         <div id="features">
