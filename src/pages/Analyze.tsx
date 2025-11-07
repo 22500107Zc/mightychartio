@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Upload, Loader2, TrendingUp, ArrowUp, ArrowDown, Check, AlertTriangle, BarChart3, Heart, Clock, Zap, X, Lock } from "lucide-react";
+import { Upload, Loader2, TrendingUp, ArrowUp, ArrowDown, Check, AlertTriangle, BarChart3, Heart, Clock, Zap, X } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
@@ -29,7 +29,7 @@ const tradeSizes = [
 
 export default function Analyze() {
   const { user, loading } = useAuth();
-  const { subscriptionStatus, canGenerate, incrementGenerationUsage, currentTier } = useSubscription();
+  const { canGenerate } = useSubscription();
   const navigate = useNavigate();
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState<any>(null);
@@ -52,18 +52,6 @@ export default function Analyze() {
       return;
     }
 
-    // Check if user can generate
-    if (!canGenerate) {
-      if (!subscriptionStatus.subscribed) {
-        toast.error("No active subscription. Please subscribe to analyze charts.");
-        navigate('/pricing');
-        return;
-      } else {
-        toast.error("Generation limit reached. Please upgrade your plan or wait for next billing cycle.");
-        navigate('/pricing');
-        return;
-      }
-    }
 
     // Validate all files are images
     for (let i = 0; i < files.length; i++) {
@@ -99,9 +87,6 @@ export default function Analyze() {
       });
 
       if (error) throw error;
-
-      // Increment generation usage
-      await incrementGenerationUsage();
 
       setResult(data);
       toast.success("Multi-timeframe confluence analysis complete!");
@@ -148,53 +133,6 @@ export default function Analyze() {
                 </div>
               </CardContent>
             </Card>
-            {subscriptionStatus.subscribed && (
-              <Card className="max-w-md mx-auto mt-6 bg-card/50 backdrop-blur-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="text-left">
-                      <div className="text-sm text-muted-foreground">Current Plan</div>
-                      <div className="font-semibold">{currentTier?.name || 'Subscribed'}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-muted-foreground">Generations</div>
-                      <div className="font-semibold">
-                        <span className={subscriptionStatus.generations_remaining <= 3 ? 'text-destructive' : 'text-success'}>
-                          {subscriptionStatus.generations_remaining}
-                        </span>
-                        /{subscriptionStatus.generations_limit}
-                      </div>
-                    </div>
-                  </div>
-                  {subscriptionStatus.generations_remaining <= 3 && (
-                    <div className="mt-3 text-xs text-destructive flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4" />
-                      <span>Low on generations! Consider upgrading your plan.</span>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            )}
-            {!subscriptionStatus.subscribed && (
-              <Card className="max-w-md mx-auto mt-6 bg-destructive/10 backdrop-blur-sm border-destructive/50">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <Lock className="w-5 h-5 text-destructive" />
-                    <div className="text-left flex-1">
-                      <div className="font-semibold text-destructive">No Active Subscription</div>
-                      <div className="text-sm text-muted-foreground">Subscribe to start analyzing charts</div>
-                    </div>
-                    <Button 
-                      size="sm" 
-                      onClick={() => navigate('/pricing')}
-                      className="bg-primary"
-                    >
-                      Subscribe
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
           </div>
 
           <Card className="bg-card/50 backdrop-blur-sm border-border mb-8">

@@ -11,7 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import TradeManagement from "./pages/TradeManagement";
-import Pricing from "./pages/Pricing";
+
 import Disclaimer from "./pages/Disclaimer";
 import TipsTricks from "./pages/TipsTricks";
 import Feedback from "./pages/Feedback";
@@ -37,7 +37,7 @@ const App = () => (
             <Route path="/admin" element={<Admin />} />
             <Route path="/trades" element={<TradeManagement />} />
             <Route path="/trade-management" element={<TradeManagement />} />
-            <Route path="/pricing" element={<Pricing />} />
+            
             <Route path="/disclaimer" element={<Disclaimer />} />
             <Route path="/tips" element={<TipsTricks />} />
             <Route path="/feedback" element={<Feedback />} />
