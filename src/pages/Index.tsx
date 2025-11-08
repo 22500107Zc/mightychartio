@@ -4,9 +4,8 @@ import { TrustSignals } from "@/components/TrustSignals";
 import { Features } from "@/components/Features";
 import { ExampleAnalysis } from "@/components/ExampleAnalysis";
 import { Comparison } from "@/components/Comparison";
-import { Testimonials } from "@/components/Testimonials";
+import { MarketData } from "@/components/MarketData";
 import { Footer } from "@/components/Footer";
-import { ApprovalBanner } from "@/components/ApprovalBanner";
 
 const Index = () => {
   return (
@@ -21,7 +20,7 @@ const Index = () => {
         </div>
         <ExampleAnalysis />
         <Comparison />
-        <Testimonials />
+        <MarketData />
         <Footer />
       </div>
     </div>
