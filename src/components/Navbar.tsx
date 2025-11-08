@@ -41,9 +41,6 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             {user ? (
               <>
-                <Link to="/dashboard" className="text-base hover:text-primary transition-colors">
-                  Dashboard
-                </Link>
                 <Link to="/analyze" className="text-base hover:text-primary transition-colors">
                   Analyze
                 </Link>
@@ -131,9 +128,6 @@ export const Navbar = () => {
               <div className="flex flex-col gap-4 mt-8">
                 {user ? (
                   <>
-                    <Link to="/dashboard" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
-                      Dashboard
-                    </Link>
                     <Link to="/analyze" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Analyze
                     </Link>

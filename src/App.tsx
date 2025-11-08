@@ -7,7 +7,6 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Analyze from "./pages/Analyze";
 import Auth from "./pages/Auth";
-import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import TradeManagement from "./pages/TradeManagement";
@@ -32,7 +31,6 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/analyze" element={<Analyze />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/trades" element={<TradeManagement />} />

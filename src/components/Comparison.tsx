@@ -63,7 +63,7 @@ export const Comparison = () => {
             <CardContent className="space-y-3">
               <div className="flex items-start gap-3">
                 <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-foreground font-medium">Analysis in 8 seconds flat</span>
+                <span className="text-foreground font-medium">Analysis in 30-60 seconds</span>
               </div>
               <div className="flex items-start gap-3">
                 <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
