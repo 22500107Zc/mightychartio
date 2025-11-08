@@ -34,7 +34,7 @@ export const TrustSignals = () => {
             <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-3">
               <Zap className="w-8 h-8 text-primary" />
             </div>
-            <div className="font-semibold text-sm">8 Second</div>
+            <div className="font-semibold text-sm">Sub-Minute</div>
             <div className="text-xs text-muted-foreground">Analysis</div>
           </div>
 
