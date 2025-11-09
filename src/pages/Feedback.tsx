@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { MessageSquare, Send, ThumbsUp, User } from "lucide-react";
+import { MessageSquare, Send, ThumbsUp, User, Trash2, Crown } from "lucide-react";
 
 interface Feedback {
   id: string;
@@ -19,6 +19,7 @@ interface Feedback {
   upvotes: number;
   created_at: string;
   display_name: string;
+  isAdmin?: boolean;
 }
 
 export default function Feedback() {
@@ -28,13 +29,30 @@ export default function Feedback() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [displayName, setDisplayName] = useState("");
+  const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
 
   useEffect(() => {
     fetchFeedbacks();
     if (user) {
       fetchDisplayName();
+      checkAdminStatus();
     }
   }, [user]);
+
+  const checkAdminStatus = async () => {
+    if (!user) return;
+    try {
+      const { data, error } = await supabase.rpc('has_role', {
+        _user_id: user.id,
+        _role: 'admin'
+      });
+      if (!error) {
+        setIsCurrentUserAdmin(data || false);
+      }
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
+  };
 
   const fetchDisplayName = async () => {
     try {
@@ -60,7 +78,23 @@ export default function Feedback() {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setFeedbacks(data || []);
+      
+      // Fetch admin status for each feedback author
+      const feedbacksWithRoles = await Promise.all(
+        (data || []).map(async (feedback) => {
+          try {
+            const { data: roleData } = await supabase.rpc('has_role', {
+              _user_id: feedback.user_id,
+              _role: 'admin'
+            });
+            return { ...feedback, isAdmin: roleData || false };
+          } catch {
+            return { ...feedback, isAdmin: false };
+          }
+        })
+      );
+      
+      setFeedbacks(feedbacksWithRoles);
     } catch (error: any) {
       console.error("Error fetching feedback:", error);
     }
@@ -149,6 +183,28 @@ export default function Feedback() {
       fetchFeedbacks();
     } catch (error: any) {
       toast.error("Failed to upvote");
+      console.error("Error:", error);
+    }
+  };
+
+  const handleDelete = async (feedbackId: string) => {
+    if (!isCurrentUserAdmin) {
+      toast.error("Only admins can delete feedback");
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from("feedback")
+        .delete()
+        .eq("id", feedbackId);
+
+      if (error) throw error;
+
+      toast.success("Feedback deleted");
+      fetchFeedbacks();
+    } catch (error: any) {
+      toast.error("Failed to delete feedback");
       console.error("Error:", error);
     }
   };
@@ -254,21 +310,44 @@ export default function Feedback() {
                             <CardTitle className="text-xl mb-2">{feedback.title}</CardTitle>
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
                               <User className="w-4 h-4" />
-                              <span>{feedback.display_name}</span>
+                              <span className="flex items-center gap-2">
+                                {feedback.display_name}
+                                {feedback.isAdmin && (
+                                  <span 
+                                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-semibold cursor-help"
+                                    title="Founder & CEO of MightyChart"
+                                  >
+                                    <Crown className="w-3 h-3" />
+                                    Founder
+                                  </span>
+                                )}
+                              </span>
                               <span>•</span>
                               <span>{new Date(feedback.created_at).toLocaleDateString()}</span>
                             </div>
                           </div>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleUpvote(feedback.id)}
-                            disabled={!user}
-                            className="flex items-center gap-2"
-                          >
-                            <ThumbsUp className="w-4 h-4" />
-                            <span className="font-semibold">{feedback.upvotes}</span>
-                          </Button>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleUpvote(feedback.id)}
+                              disabled={!user}
+                              className="flex items-center gap-2"
+                            >
+                              <ThumbsUp className="w-4 h-4" />
+                              <span className="font-semibold">{feedback.upvotes}</span>
+                            </Button>
+                            {isCurrentUserAdmin && (
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={() => handleDelete(feedback.id)}
+                                className="flex items-center gap-2"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </CardHeader>
                       <CardContent>
