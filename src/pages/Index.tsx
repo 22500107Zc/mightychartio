@@ -4,7 +4,6 @@ import { TrustSignals } from "@/components/TrustSignals";
 import { Features } from "@/components/Features";
 import { ExampleAnalysis } from "@/components/ExampleAnalysis";
 import { Comparison } from "@/components/Comparison";
-import { MarketData } from "@/components/MarketData";
 import { Footer } from "@/components/Footer";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
@@ -63,7 +62,6 @@ const Index = () => {
         </div>
         <ExampleAnalysis />
         <Comparison />
-        <MarketData />
         <Footer />
       </div>
     </div>
