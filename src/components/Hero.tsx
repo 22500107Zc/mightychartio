@@ -29,16 +29,16 @@ export const Hero = () => {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
             <div className="flex flex-col items-center">
-              <div className="text-4xl md:text-5xl font-bold text-accent">89%</div>
-              <div className="text-sm text-muted-foreground mt-1">Pattern Accuracy</div>
-            </div>
-            <div className="flex flex-col items-center">
               <div className="text-4xl md:text-5xl font-bold text-accent">30-60s</div>
               <div className="text-sm text-muted-foreground mt-1">Analysis Speed</div>
             </div>
             <div className="flex flex-col items-center">
               <div className="text-4xl md:text-5xl font-bold text-accent">12+</div>
               <div className="text-sm text-muted-foreground mt-1">Confluence Factors</div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="text-4xl md:text-5xl font-bold text-accent">AI</div>
+              <div className="text-sm text-muted-foreground mt-1">Powered Engine</div>
             </div>
           </div>
 
