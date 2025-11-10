@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useHaptic } from "@/hooks/useHaptic";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Hero = () => {
   const { lightTap } = useHaptic();
+  const { user } = useAuth();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden pt-16 md:pt-20">
@@ -71,13 +73,13 @@ export const Hero = () => {
 
           {/* CTA Buttons with enhanced styling */}
           <div className="flex flex-col sm:flex-row gap-4 pt-6 animate-[fade-in_1s_ease-out_0.9s_both]">
-            <Link to="/analyze">
+            <Link to={user ? "/dashboard" : "/analyze"}>
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-primary to-accent hover:shadow-glow transition-all duration-300 text-base md:text-lg px-8 md:px-12 py-6 group" 
                 onClick={lightTap}
               >
-                Start Free Analysis
+                {user ? "Go to Dashboard" : "Start Free Analysis"}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
