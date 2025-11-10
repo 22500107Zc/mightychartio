@@ -94,7 +94,7 @@ All colors MUST be HSL.
   }
 }
 
-/* Animated purple overlay */
+/* Animated purple overlay - only in dark mode */
 @keyframes purple-float {
   0%, 100% {
     transform: translate(0, 0) scale(1);
@@ -117,7 +117,7 @@ All colors MUST be HSL.
   z-index: 0;
 }
 
-.purple-overlay::before {
+.dark .purple-overlay::before {
   content: '';
   position: absolute;
   top: -50%;

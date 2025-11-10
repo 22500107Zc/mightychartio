@@ -169,16 +169,13 @@ const Admin = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Admin Actions</CardTitle>
-            <CardDescription>Manage system settings and data</CardDescription>
+            <CardTitle>System Overview</CardTitle>
+            <CardDescription>Monitor platform activity and performance</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent>
             <p className="text-sm text-muted-foreground">
-              Admin panel is active. You can view system-wide statistics and manage users.
+              Admin panel is active. System statistics are displayed above for monitoring platform usage and performance.
             </p>
-            <Button onClick={() => toast({ title: "Feature coming soon", description: "Advanced admin features are in development." })}>
-              Manage Users
-            </Button>
           </CardContent>
         </Card>
         </div>
