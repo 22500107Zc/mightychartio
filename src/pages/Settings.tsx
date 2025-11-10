@@ -10,8 +10,9 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, Crown } from 'lucide-react';
 import { z } from 'zod';
+import { Badge } from '@/components/ui/badge';
 
 const displayNameSchema = z.string()
   .trim()
@@ -27,6 +28,7 @@ const Settings = () => {
   const [displayName, setDisplayName] = useState('');
   const [language, setLanguage] = useState('en');
   const [saving, setSaving] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -52,6 +54,16 @@ const Settings = () => {
         setDisplayName(profile.display_name || '');
         setLanguage(profile.language || 'en');
       }
+
+      // Check if user is admin
+      const { data: roleData } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user?.id)
+        .eq('role', 'admin')
+        .single();
+      
+      setIsAdmin(!!roleData);
     } catch (error: any) {
       console.error('Error fetching settings:', error);
     }
@@ -127,8 +139,16 @@ const Settings = () => {
         <Navbar />
         <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Settings</h1>
-          <p className="text-muted-foreground">Manage your account preferences</p>
+          <div className="flex items-center gap-3">
+            <h1 className="text-4xl font-bold">Settings</h1>
+            {isAdmin && (
+              <Badge variant="default" className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white border-0 px-3 py-1 flex items-center gap-1.5">
+                <Crown className="w-3.5 h-3.5" />
+                Founder
+              </Badge>
+            )}
+          </div>
+          <p className="text-muted-foreground mt-2">Manage your account preferences</p>
         </div>
 
         <div className="max-w-2xl space-y-6">
