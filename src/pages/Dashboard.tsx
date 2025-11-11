@@ -6,7 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useHaptic } from '@/hooks/useHaptic';
-import { ArrowRight, TrendingUp, Target, Zap, BarChart3 } from 'lucide-react';
+import { ArrowRight, TrendingUp, Target, Zap } from 'lucide-react';
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -77,9 +77,9 @@ const Dashboard = () => {
           </div>
 
           {/* Quick Actions Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 gap-6 mb-8">
             {/* Main Action Card */}
-            <Card className="md:col-span-2 lg:col-span-2 border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow">
+            <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
                   <Zap className="w-6 h-6 text-primary" />
@@ -99,26 +99,6 @@ const Dashboard = () => {
                   Analyze Chart Now
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </CardContent>
-            </Card>
-
-            {/* Stats Card */}
-            <Card className="border-accent/20 hover:border-accent/40 transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="w-5 h-5 text-accent" />
-                  Stats
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Analyses</p>
-                  <p className="text-3xl font-bold text-accent">-</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Win Rate</p>
-                  <p className="text-3xl font-bold text-success">-</p>
-                </div>
               </CardContent>
             </Card>
           </div>

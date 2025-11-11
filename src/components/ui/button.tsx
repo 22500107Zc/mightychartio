@@ -39,15 +39,58 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, onClick, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+    const [ripples, setRipples] = React.useState<Array<{ x: number; y: number; id: number }>>([]);
     
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if ('vibrate' in navigator) {
         navigator.vibrate(10);
       }
+      
+      // Create ripple effect
+      const button = e.currentTarget;
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const id = Date.now();
+      
+      setRipples(prev => [...prev, { x, y, id }]);
+      
+      // Remove ripple after animation
+      setTimeout(() => {
+        setRipples(prev => prev.filter(r => r.id !== id));
+      }, 600);
+      
       onClick?.(e);
     };
     
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} onClick={handleClick} {...props} />;
+    return (
+      <Comp 
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          "relative overflow-hidden group/btn",
+          "before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/0 before:via-primary/30 before:to-accent/0",
+          "before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700"
+        )} 
+        ref={ref} 
+        onClick={handleClick} 
+        {...props}
+      >
+        {ripples.map((ripple) => (
+          <span
+            key={ripple.id}
+            className="absolute rounded-full bg-gradient-to-r from-primary via-accent to-primary animate-ping pointer-events-none"
+            style={{
+              left: ripple.x,
+              top: ripple.y,
+              width: '10px',
+              height: '10px',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        ))}
+        <span className="relative z-10">{props.children}</span>
+      </Comp>
+    );
   },
 );
 Button.displayName = "Button";
