@@ -139,11 +139,9 @@ export const Navbar = () => {
               <div className="flex flex-col gap-4 mt-8">
                 {user ? (
                   <>
-                    <Link to="/" onClick={() => setMobileMenuOpen(false)}>
-                      <Button size="sm" variant="outline" className="w-full">
-                        <Home className="mr-2 h-4 w-4" />
-                        Home
-                      </Button>
+                    <Link to="/" className="text-base hover:text-primary transition-colors flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                      <Home className="h-4 w-4" />
+                      Home
                     </Link>
                     <Link to="/dashboard" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Dashboard
@@ -183,11 +181,9 @@ export const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <Link to="/" onClick={() => setMobileMenuOpen(false)}>
-                      <Button size="sm" variant="outline" className="w-full">
-                        <Home className="mr-2 h-4 w-4" />
-                        Home
-                      </Button>
+                    <Link to="/" className="text-base hover:text-primary transition-colors flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                      <Home className="h-4 w-4" />
+                      Home
                     </Link>
                     <Link to="/#features" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Features
