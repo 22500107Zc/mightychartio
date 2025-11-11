@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { LogOut, Settings as SettingsIcon, Menu, X, ExternalLink } from "lucide-react";
+import { LogOut, Settings as SettingsIcon, Menu, X, ExternalLink, Home } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
@@ -33,10 +33,17 @@ export const Navbar = () => {
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-12">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="MightyChart.io" className="w-7 h-7" />
-            <span className="font-bold text-lg">MightyChart.io</span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to="/" className="flex items-center gap-2">
+              <img src={logo} alt="MightyChart.io" className="w-7 h-7" />
+              <span className="font-bold text-lg">MightyChart.io</span>
+            </Link>
+            <Link to="/" className="hidden md:block">
+              <Button size="sm" variant="outline" className="h-9 w-9 p-0 rounded-lg">
+                <Home className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
 
           <div className="hidden md:flex items-center gap-8">
             {user ? (
@@ -131,6 +138,12 @@ export const Navbar = () => {
               <div className="flex flex-col gap-4 mt-8">
                 {user ? (
                   <>
+                    <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+                      <Button size="sm" variant="outline" className="w-full">
+                        <Home className="mr-2 h-4 w-4" />
+                        Home
+                      </Button>
+                    </Link>
                     <Link to="/dashboard" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Dashboard
                     </Link>
@@ -169,6 +182,12 @@ export const Navbar = () => {
                   </>
                 ) : (
                   <>
+                    <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+                      <Button size="sm" variant="outline" className="w-full">
+                        <Home className="mr-2 h-4 w-4" />
+                        Home
+                      </Button>
+                    </Link>
                     <Link to="/#features" className="text-base hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                       Features
                     </Link>
