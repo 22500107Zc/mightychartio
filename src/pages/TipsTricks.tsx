@@ -176,16 +176,6 @@ const TipsTricks = () => {
                   you can analyze 8+ charts every single day and never miss a high-probability setup.
                 </li>
               </ul>
-              <div className="mt-6 p-5 bg-gradient-primary rounded-lg text-center">
-                <p className="text-primary-foreground font-bold text-lg mb-3">
-                  One winning trade pays for months of subscription
-                </p>
-                <Link to="/pricing">
-                  <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
-                    View Pricing Plans
-                  </Button>
-                </Link>
-              </div>
             </CardContent>
           </Card>
 
