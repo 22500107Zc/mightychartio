@@ -39,8 +39,9 @@ export const Navbar = () => {
               <span className="font-bold text-lg">MightyChart.io</span>
             </Link>
             <Link to="/" className="hidden md:block">
-              <Button size="sm" variant="outline" className="h-9 w-9 p-0 rounded-lg">
-                <Home className="h-4 w-4" />
+              <Button size="sm" variant="outline" className="rounded-lg">
+                <Home className="h-4 w-4 mr-2" />
+                Home
               </Button>
             </Link>
           </div>
