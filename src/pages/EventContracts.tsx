@@ -66,13 +66,14 @@ export default function EventContracts() {
 
       setAnalyzing(true);
       try {
-        const { data, error } = await supabase.functions.invoke("analyze-event-contract", {
-          body: {
-            image: base64String,
-            contractTimeframe,
-            chartTimeframe,
-          },
-        });
+      const { data, error } = await supabase.functions.invoke("analyze-chart", {
+        body: {
+          images: [base64String],
+          mode: "event-contract",
+          contractTimeframe,
+          chartTimeframe,
+        },
+      });
 
         if (error) throw error;
         setResult(data);
@@ -219,14 +220,14 @@ export default function EventContracts() {
             <div className="space-y-6">
               <Card className="p-8 text-center">
                 <div className="mb-6">
-                  {result.direction === "HIGHER" ? (
+                  {(result.direction === "HIGHER" || result.recommendation === "BUY") ? (
                     <TrendingUp className="h-24 w-24 mx-auto text-green-500" />
                   ) : (
                     <TrendingDown className="h-24 w-24 mx-auto text-red-500" />
                   )}
                 </div>
                 <h2 className="text-5xl font-bold mb-4">
-                  {result.direction === "HIGHER" ? (
+                  {(result.direction === "HIGHER" || result.recommendation === "BUY") ? (
                     <span className="text-green-500">HIGHER</span>
                   ) : (
                     <span className="text-red-500">LOWER</span>
@@ -237,7 +238,7 @@ export default function EventContracts() {
                 </p>
                 <div className="inline-block px-6 py-3 bg-primary/10 rounded-lg">
                   <p className="text-lg font-semibold">
-                    Confidence: {result.confidence}%
+                    Confidence: {result.confidence || result.probability}
                   </p>
                 </div>
               </Card>
@@ -245,7 +246,7 @@ export default function EventContracts() {
               <Card className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Analysis Details</h3>
                 <div className="space-y-4 text-muted-foreground">
-                  <p>{result.reasoning}</p>
+                  <p>{result.reasoning || result.reasoningShort || result.technicalSentiment}</p>
                   {result.keyFactors && (
                     <div>
                       <p className="font-semibold text-foreground mb-2">Key Factors:</p>
@@ -254,6 +255,28 @@ export default function EventContracts() {
                           <li key={index}>{factor}</li>
                         ))}
                       </ul>
+                    </div>
+                  )}
+                  {(result.entry || result.stopLoss || result.target) && (
+                    <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t">
+                      {result.entry && (
+                        <div>
+                          <p className="font-semibold text-foreground">Entry</p>
+                          <p>{result.entry}</p>
+                        </div>
+                      )}
+                      {result.stopLoss && (
+                        <div>
+                          <p className="font-semibold text-foreground">Stop Loss</p>
+                          <p>{result.stopLoss}</p>
+                        </div>
+                      )}
+                      {result.target && (
+                        <div>
+                          <p className="font-semibold text-foreground">Target</p>
+                          <p>{result.target}</p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
