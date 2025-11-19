@@ -6,7 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useHaptic } from '@/hooks/useHaptic';
-import { ArrowRight, TrendingUp, Target, Zap } from 'lucide-react';
+import { ArrowRight, TrendingUp, Target, Zap, Clock } from 'lucide-react';
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -77,7 +77,7 @@ const Dashboard = () => {
           </div>
 
           {/* Quick Actions Grid */}
-          <div className="grid grid-cols-1 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {/* Main Action Card */}
             <Card className="border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow">
               <CardHeader>
@@ -97,6 +97,30 @@ const Dashboard = () => {
                   }}
                 >
                   Analyze Chart Now
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Event Contracts Card */}
+            <Card className="border-orange-500/20 hover:border-orange-500/40 transition-all duration-300 hover:shadow-glow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-2xl">
+                  <Clock className="w-6 h-6 text-orange-500" />
+                  Event Contracts
+                </CardTitle>
+                <CardDescription>Get HIGHER/LOWER predictions for binary options</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button 
+                  size="lg" 
+                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:shadow-glow transition-all duration-300 group" 
+                  onClick={() => {
+                    lightTap();
+                    navigate('/event-contracts');
+                  }}
+                >
+                  Analyze Event Contract
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </CardContent>
