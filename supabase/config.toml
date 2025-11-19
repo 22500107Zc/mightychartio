@@ -1,1 +1,7 @@
 project_id = "mtwzttfrjptsluulijwf"
+
+[functions.analyze-chart]
+verify_jwt = false
+
+[functions.analyze-event-contract]
+verify_jwt = false

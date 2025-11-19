@@ -11,6 +11,7 @@ import Auth from "./pages/Auth";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import TradeManagement from "./pages/TradeManagement";
+import EventContracts from "./pages/EventContracts";
 
 import Disclaimer from "./pages/Disclaimer";
 import TipsTricks from "./pages/TipsTricks";
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/admin" element={<Admin />} />
             <Route path="/trades" element={<TradeManagement />} />
             <Route path="/trade-management" element={<TradeManagement />} />
+            <Route path="/event-contracts" element={<EventContracts />} />
             
             <Route path="/disclaimer" element={<Disclaimer />} />
             <Route path="/tips" element={<TipsTricks />} />
