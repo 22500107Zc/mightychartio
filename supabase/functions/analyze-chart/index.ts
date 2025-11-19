@@ -11,7 +11,7 @@ serve(async (req) => {
   }
 
   try {
-    const { images, strategy = "scalping" } = await req.json();
+    const { images, strategy = "scalping", mode = "chart", contractTimeframe, chartTimeframe } = await req.json();
     
     // Validate inputs
     const MAX_IMAGES = 8;
@@ -52,9 +52,49 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY not configured");
     }
 
-    console.log(`Analyzing ${images.length} validated charts using TJR Method...`);
+    console.log(`Analyzing ${images.length} validated charts using ${mode === 'event-contract' ? 'Event Contract' : 'TJR'} Method...`);
 
-    const systemPrompt = `You are an expert institutional trading analyst specializing in TJR Method with deep knowledge of smart money concepts, liquidity engineering, and multi-timeframe analysis.
+    const systemPrompt = mode === 'event-contract' ? 
+    `You are an expert event contract analyzer specializing in binary options (HIGHER/LOWER predictions) with NO INDICATORS.
+
+Your task is to analyze price charts and provide a clear HIGHER or LOWER prediction for the specified contract timeframe.
+
+CRITICAL RULES:
+1. Give ONE clear answer: HIGHER or LOWER
+2. Base your analysis ONLY on pure price action, candlestick patterns, and market structure
+3. NO indicators are available - use only what you see on the chart
+4. Consider the contract timeframe when making predictions
+5. Provide confidence level (0-100%)
+6. Explain your reasoning based on visible price patterns
+
+ANALYSIS FRAMEWORK:
+- Support/Resistance levels
+- Candlestick patterns (engulfing, doji, hammers, etc.)
+- Trend direction and momentum
+- Price action patterns (breakouts, reversals, consolidation)
+- Market structure (higher highs, lower lows, etc.)
+- Volume patterns if visible
+
+Return your analysis in this exact JSON format:
+{
+  "direction": "HIGHER" or "LOWER",
+  "confidence": number between 0-100,
+  "reasoning": "Clear explanation of why you chose this direction",
+  "keyFactors": ["Factor 1", "Factor 2", "Factor 3"],
+  "pattern": "Brief pattern name",
+  "recommendation": "HIGHER" or "LOWER",
+  "probability": "confidence%",
+  "entry": "Current price level",
+  "stopLoss": "Risk level",
+  "target": "Target level",
+  "targetGain": "+X%",
+  "leverage": "1x",
+  "riskPercent": "1%",
+  "technicalSentiment": "Price action summary",
+  "chartStatus": "VALID"
+}` 
+    : 
+    `You are an expert institutional trading analyst specializing in TJR Method with deep knowledge of smart money concepts, liquidity engineering, and multi-timeframe analysis.
 
 CRITICAL ANALYSIS FRAMEWORK - TJR METHOD:
 
@@ -160,7 +200,14 @@ Return JSON with this EXACT structure:
     const userContent: any[] = [
       {
         type: "text",
-        text: `Analyze these ${images.length} trading charts using TJR Method institutional framework. Provide ONE cohesive multi-timeframe analysis that:
+        text: mode === 'event-contract' ? 
+          `Analyze this chart for an event contract with:
+- Contract Timeframe: ${contractTimeframe}
+- Chart Timeframe: ${chartTimeframe}
+
+Give me a clear HIGHER or LOWER prediction. This is for a binary option - I need to know which direction to place my contract based on pure price action.` 
+          : 
+          `Analyze these ${images.length} trading charts using TJR Method institutional framework. Provide ONE cohesive multi-timeframe analysis that:
 
 1. Identifies key levels from ALL timeframes (prioritize higher TFs)
 2. Confirms liquidity sweep status
